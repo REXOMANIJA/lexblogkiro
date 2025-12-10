@@ -165,8 +165,7 @@ export function Comments({ postId }: CommentsProps) {
               style={{ 
                 borderColor: '#c3d9c7', 
                 backgroundColor: '#f0f5f1', 
-                color: '#304b35',
-                focusRingColor: '#6aa074'
+                color: '#304b35'
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = '#6aa074';
