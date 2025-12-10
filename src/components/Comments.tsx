@@ -141,19 +141,19 @@ export function Comments({ postId }: CommentsProps) {
 
   return (
     <div className="mt-12 sm:mt-16">
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+      <h3 className="text-2xl font-bold mb-6" style={{ color: '#304b35' }}>
         Comments ({comments.length})
       </h3>
 
       {/* Comment Form */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md mb-8">
-        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="rounded-xl p-6 shadow-md mb-8" style={{ backgroundColor: '#f0f5f1', borderColor: '#d2e2d5' }}>
+        <h4 className="text-lg font-semibold mb-4" style={{ color: '#304b35' }}>
           Leave a Comment
         </h4>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="author-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="author-name" className="block text-sm font-medium mb-2" style={{ color: '#304b35' }}>
               Your Name
             </label>
             <input
@@ -161,7 +161,21 @@ export function Comments({ postId }: CommentsProps) {
               id="author-name"
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+              style={{ 
+                borderColor: '#c3d9c7', 
+                backgroundColor: '#f0f5f1', 
+                color: '#304b35',
+                focusRingColor: '#6aa074'
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#6aa074';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(106, 160, 116, 0.1)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '#c3d9c7';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
               placeholder="Enter your name"
               disabled={submitting}
               required
@@ -169,7 +183,7 @@ export function Comments({ postId }: CommentsProps) {
           </div>
 
           <div>
-            <label htmlFor="comment-content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="comment-content" className="block text-sm font-medium mb-2" style={{ color: '#304b35' }}>
               Comment
             </label>
             <div className="relative">
@@ -179,7 +193,20 @@ export function Comments({ postId }: CommentsProps) {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-2 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2 pr-12 border rounded-lg focus:ring-2 focus:border-transparent resize-none"
+                style={{ 
+                  borderColor: '#c3d9c7', 
+                  backgroundColor: '#f0f5f1', 
+                  color: '#304b35'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#6aa074';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(106, 160, 116, 0.1)';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#c3d9c7';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
                 placeholder="Write your comment..."
                 disabled={submitting}
                 required
@@ -222,7 +249,10 @@ export function Comments({ postId }: CommentsProps) {
           <button
             type="submit"
             disabled={submitting}
-            className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ backgroundColor: '#6aa074' }}
+            onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#507c58')}
+            onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#6aa074')}
           >
             {submitting ? 'Posting...' : 'Post Comment'}
           </button>
@@ -232,10 +262,10 @@ export function Comments({ postId }: CommentsProps) {
       {/* Comments List */}
       {loading ? (
         <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-t-transparent" style={{ borderColor: '#6aa074' }}></div>
         </div>
       ) : comments.length === 0 ? (
-        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+        <div className="text-center py-8" style={{ color: '#53815b' }}>
           No comments yet. Be the first to comment!
         </div>
       ) : (
@@ -243,19 +273,24 @@ export function Comments({ postId }: CommentsProps) {
           {comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md"
+              className="rounded-xl p-6 shadow-md border"
+              style={{ 
+                backgroundColor: '#f0f5f1', 
+                borderColor: '#e1ece3',
+                boxShadow: '0 4px 6px -1px rgba(48, 75, 53, 0.1), 0 2px 4px -1px rgba(48, 75, 53, 0.06)'
+              }}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold text-sm" style={{ backgroundColor: '#6aa074' }}>
                       {comment.author_name.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <h5 className="font-semibold text-gray-900 dark:text-white">
+                      <h5 className="font-semibold" style={{ color: '#304b35' }}>
                         {comment.author_name}
                       </h5>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm" style={{ color: '#53815b' }}>
                         {new Date(comment.created_at).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
@@ -266,7 +301,7 @@ export function Comments({ postId }: CommentsProps) {
                       </p>
                     </div>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className="leading-relaxed" style={{ color: '#507c58' }}>
                     {comment.content}
                   </p>
                 </div>
@@ -289,7 +324,7 @@ export function Comments({ postId }: CommentsProps) {
                 )}
                 
                 {userComments.includes(comment.id) && !isAdminMode && (
-                  <span className="ml-2 text-xs text-primary-600 dark:text-primary-400 font-medium">
+                  <span className="ml-2 text-xs font-medium" style={{ color: '#53815b' }}>
                     Your comment
                   </span>
                 )}

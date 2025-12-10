@@ -21,15 +21,21 @@ export function CreatePostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 animate-fade-in">
-          <Link to="/" className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 font-medium transition-colors group"
+            style={{ color: '#53815b' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#304b35'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#53815b'}
+          >
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="font-medium">Back to Home</span>
+            <span>Back to Home</span>
           </Link>
         </div>
         <PostEditor mode="create" onSuccess={handleSuccess} />

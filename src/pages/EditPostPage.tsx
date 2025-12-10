@@ -61,7 +61,7 @@ export function EditPostPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
         <LogoutButton />
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex justify-center items-center py-24">
@@ -77,7 +77,7 @@ export function EditPostPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
         <LogoutButton />
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-red-800 dark:text-red-200 mb-6 animate-scale-in">
@@ -109,7 +109,7 @@ export function EditPostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 animate-fade-in">

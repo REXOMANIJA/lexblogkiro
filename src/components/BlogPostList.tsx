@@ -72,8 +72,8 @@ export function BlogPostList() {
     return (
       <div className="flex justify-center items-center py-16 sm:py-24">
         <div className="relative">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 dark:border-gray-700"></div>
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-600 border-t-transparent absolute top-0 left-0"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4" style={{ borderColor: '#d2e2d5' }}></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-t-transparent absolute top-0 left-0" style={{ borderColor: '#6aa074' }}></div>
         </div>
       </div>
     );
@@ -82,7 +82,13 @@ export function BlogPostList() {
   if (error) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-red-800 dark:text-red-200 animate-scale-in">
+        <div className="border rounded-xl p-6 animate-scale-in" style={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+          borderColor: 'rgba(180, 207, 185, 0.6)', 
+          color: '#507c58',
+          boxShadow: '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)',
+          backdropFilter: 'blur(10px)'
+        }}>
           <div className="flex items-start gap-3">
             <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -100,12 +106,13 @@ export function BlogPostList() {
   if (posts.length === 0) {
     return (
       <div className="text-center py-16 sm:py-24 animate-fade-in">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-gray-800 mb-6">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style={{ backgroundColor: '#e1ece3' }}>
           <svg
-            className="w-10 h-10 text-gray-400 dark:text-gray-500"
+            className="w-10 h-10"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            style={{ color: '#53815b' }}
           >
             <path
               strokeLinecap="round"
@@ -115,8 +122,8 @@ export function BlogPostList() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">No posts yet</h3>
-        <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+        <h3 className="text-2xl font-medium mb-2" style={{ color: '#507c58' }}>No posts yet</h3>
+        <p className="max-w-md mx-auto" style={{ color: '#53815b' }}>
           Check back soon for new stories and adventures!
         </p>
       </div>
@@ -129,8 +136,22 @@ export function BlogPostList() {
         <Link
           key={post.id}
           to={`/post/${post.id}`}
-          className="stagger-item group bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 block relative"
-          style={{ animationDelay: `${index * 0.05}s` }}
+          className="stagger-item group rounded-xl overflow-hidden transition-all duration-300 block relative transform hover:-translate-y-2"
+          style={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+            border: '1px solid rgba(180, 207, 185, 0.6)',
+            boxShadow: '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)',
+            backdropFilter: 'blur(10px)',
+            animationDelay: `${index * 0.05}s`
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.border = '1px solid rgba(106, 160, 116, 0.8)';
+            e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(48, 75, 53, 0.25), 0 8px 20px -5px rgba(48, 75, 53, 0.15), 0 0 20px rgba(106, 160, 116, 0.2)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.border = '1px solid rgba(180, 207, 185, 0.6)';
+            e.currentTarget.style.boxShadow = '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)';
+          }}
         >
           <article>
             {/* Admin controls */}
@@ -138,7 +159,10 @@ export function BlogPostList() {
               <div className="absolute top-3 right-3 z-10 flex gap-2" data-testid="admin-controls">
                 <button
                   onClick={(e) => handleEdit(post.id, e)}
-                  className="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg transition-all duration-200 hover:scale-105"
+                  className="text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-md transition-all duration-200 hover:scale-105"
+                  style={{ backgroundColor: '#6aa074' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#507c58'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6aa074'}
                   data-testid="edit-button"
                   aria-label="Edit post"
                 >
@@ -147,7 +171,20 @@ export function BlogPostList() {
                 <button
                   onClick={(e) => handleDelete(post.id, e)}
                   disabled={deletingId === post.id}
-                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="px-3 py-1.5 rounded-lg text-sm font-medium shadow-md transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  style={{ backgroundColor: '#b4cfb9', color: '#304b35' }}
+                  onMouseEnter={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = '#53815b';
+                      e.currentTarget.style.color = 'white';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = '#b4cfb9';
+                      e.currentTarget.style.color = '#304b35';
+                    }
+                  }}
                   data-testid="delete-button"
                   aria-label="Delete post"
                 >
@@ -158,7 +195,7 @@ export function BlogPostList() {
 
             {/* First photo as preview */}
             {post.photo_urls.length > 0 && (
-              <div className="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+              <div className="aspect-video w-full overflow-hidden" style={{ backgroundColor: 'rgba(210, 226, 213, 0.3)' }}>
                 <img
                   src={post.photo_urls[0]}
                   alt={post.title}
@@ -169,7 +206,7 @@ export function BlogPostList() {
             )}
 
             <div className="p-5 sm:p-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 line-clamp-2 transition-colors" style={{ color: '#304b35' }}>
                 {post.title}
               </h2>
               
@@ -195,18 +232,18 @@ export function BlogPostList() {
                     );
                   })}
                   {post.category_ids.length > 3 && (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: '#e1ece3', color: '#53815b' }}>
                       +{post.category_ids.length - 3}
                     </span>
                   )}
                 </div>
               )}
 
-              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base mb-4 line-clamp-3 leading-relaxed">
+              <p className="text-sm sm:text-base mb-4 line-clamp-3 leading-relaxed" style={{ color: '#507c58' }}>
                 {createExcerpt(post.story)}
               </p>
               <div className="flex items-center justify-between">
-                <time className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+                <time className="text-xs sm:text-sm flex items-center gap-1.5" style={{ color: '#53815b' }}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -216,7 +253,7 @@ export function BlogPostList() {
                     day: 'numeric',
                   })}
                 </time>
-                <span className="text-primary-600 dark:text-primary-400 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                <span className="text-sm font-medium group-hover:translate-x-1 transition-all inline-flex items-center gap-1" style={{ color: '#53815b' }}>
                   Read more
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -25,7 +25,10 @@ export function LogoutButton() {
     <button
       onClick={handleLogout}
       disabled={loggingOut}
-      className="fixed top-4 right-4 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed z-50 transform hover:-translate-y-0.5 disabled:hover:translate-y-0 flex items-center gap-2"
+      className="fixed top-4 right-4 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed z-50 transform hover:-translate-y-0.5 disabled:hover:translate-y-0 flex items-center gap-2"
+      style={{ backgroundColor: '#6aa074' }}
+      onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#507c58')}
+      onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#6aa074')}
       data-testid="logout-button"
       aria-label="Logout"
     >

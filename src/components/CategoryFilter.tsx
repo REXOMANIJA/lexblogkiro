@@ -51,8 +51,8 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
     return (
       <div className="flex justify-center py-4">
         <div className="relative">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-200 dark:border-gray-700"></div>
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent absolute top-0 left-0"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-ash-grey-700 dark:border-ash-grey-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-sage-green-500 border-t-transparent absolute top-0 left-0"></div>
         </div>
       </div>
     );
@@ -60,7 +60,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
 
   if (error) {
     return (
-      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-800 dark:text-red-200">
+      <div className="bg-ash-grey-800 dark:bg-ash-grey-700 border border-ash-grey-600 dark:border-ash-grey-500 rounded-lg p-4 text-fern-500 dark:text-sage-green-400">
         <div className="flex items-center gap-2">
           <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -79,7 +79,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
     <div className="mb-8 animate-fade-in">
       <div className="flex flex-wrap items-center gap-3">
         {/* Filter label */}
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <span className="text-sm font-medium" style={{ color: '#304b35' }}>
           Filter by category:
         </span>
 
@@ -92,18 +92,29 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
             <button
               key={category.id}
               onClick={() => onCategoryToggle(category.id)}
-              className={`
-                inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-                transition-all duration-200 transform hover:scale-105
-                ${isSelected
-                  ? 'text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
-                }
-              `}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105"
               style={isSelected ? {
                 backgroundColor: category.color,
-                borderColor: category.color,
-              } : undefined}
+                border: `1px solid ${category.color}`,
+                color: 'white',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+              } : {
+                backgroundColor: '#f0f5f1',
+                border: '1px solid #c3d9c7',
+                color: '#304b35'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSelected) {
+                  e.currentTarget.style.backgroundColor = '#e1ece3';
+                  e.currentTarget.style.borderColor = '#6aa074';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSelected) {
+                  e.currentTarget.style.backgroundColor = '#f0f5f1';
+                  e.currentTarget.style.borderColor = '#c3d9c7';
+                }
+              }}
               aria-pressed={isSelected}
               aria-label={`Filter by ${category.name}`}
             >
@@ -127,10 +138,16 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
         {selectedCategoryIds.length > 0 && (
           <button
             onClick={onClearFilters}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium
-              bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300
-              hover:bg-gray-300 dark:hover:bg-gray-600
-              transition-all duration-200 transform hover:scale-105"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 transform hover:scale-105"
+            style={{ backgroundColor: '#b4cfb9', color: '#304b35' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#6aa074';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#b4cfb9';
+              e.currentTarget.style.color = '#304b35';
+            }}
             aria-label="Clear all filters"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

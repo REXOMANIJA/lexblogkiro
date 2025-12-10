@@ -42,10 +42,10 @@ export function PostDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
         <div className="relative">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 dark:border-gray-700"></div>
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-600 border-t-transparent absolute top-0 left-0"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4" style={{ borderColor: '#d2e2d5' }}></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-t-transparent absolute top-0 left-0" style={{ borderColor: '#6aa074' }}></div>
         </div>
       </div>
     );
@@ -53,19 +53,22 @@ export function PostDetailPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
         <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-red-800 dark:text-red-200 mb-6 animate-scale-in">
+          <div className="border rounded-xl p-6 mb-6 animate-scale-in" style={{ backgroundColor: '#e1ece3', borderColor: '#c3d9c7', color: '#507c58' }}>
             <div className="flex items-start gap-3 mb-4">
               <svg className="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div className="flex-1">
-                <p className="font-semibold text-lg mb-1">Error</p>
+                <p className="font-medium text-lg mb-1">Error</p>
                 <p className="text-sm opacity-90 mb-3">{error || 'Post not found'}</p>
                 <button
                   onClick={loadPost}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm"
+                  className="px-4 py-2 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm"
+                  style={{ backgroundColor: '#6aa074' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#507c58'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6aa074'}
                 >
                   Try Again
                 </button>
@@ -74,7 +77,10 @@ export function PostDetailPage() {
           </div>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
+            className="inline-flex items-center gap-2 font-medium transition-colors"
+            style={{ color: '#53815b' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#507c58'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#53815b'}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -87,7 +93,7 @@ export function PostDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto">
         {/* Back button */}

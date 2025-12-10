@@ -27,7 +27,7 @@ export function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{ background: 'conic-gradient(from 45deg, #f0f5f1, #e1ece3, #d3e3d6, #c3d9c7, #b4cfb9, #f0f5f1)' }}>
       <div className="max-w-md w-full animate-scale-in">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 sm:p-10">
           {/* Lock icon */}
