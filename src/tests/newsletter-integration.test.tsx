@@ -3,7 +3,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { NewsletterSubscriptionForm } from '../components/NewsletterSubscriptionForm';
 import { NewsletterSendButton } from '../components/NewsletterSendButton';
-import { PostEditor } from '../components/PostEditor';
 import { HomePage } from '../pages/HomePage';
 import { NewsletterManagementPage } from '../pages/NewsletterManagementPage';
 import * as supabaseService from '../services/supabase';
@@ -60,25 +59,11 @@ vi.mock('@tiptap/react', () => ({
 }));
 
 describe('Newsletter Integration Tests', () => {
-  const mockCreatePost = vi.mocked(supabaseService.createPost);
-  const mockUpdatePost = vi.mocked(supabaseService.updatePost);
   const mockFetchCategories = vi.mocked(supabaseService.fetchAllCategories);
   const mockSubscribeToNewsletter = vi.mocked(newsletterService.subscribeToNewsletter);
   const mockSendNewsletter = vi.mocked(newsletterService.sendNewsletterEmail);
   const mockGetSubscriberCount = vi.mocked(newsletterService.getSubscriberCount);
   const mockGetActiveSubscribers = vi.mocked(newsletterService.getActiveSubscribers);
-
-  const mockPost = {
-    id: 'test-post-id',
-    title: 'Newsletter Integration Test Post',
-    story: '<p>This is the first paragraph of the newsletter test post.</p><p>This is the second paragraph.</p>',
-    photo_urls: ['https://example.com/test.jpg'],
-    cover_image_url: 'https://example.com/test.jpg',
-    cover_image_position: { x: 50, y: 50, zoom: 100 },
-    category_ids: [],
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z'
-  };
 
   const mockSubscribers = [
     {
@@ -144,7 +129,7 @@ describe('Newsletter Integration Tests', () => {
     expect(mockSubscribeToNewsletter).toHaveBeenCalledWith('newuser@example.com');
 
     // Step 2: Test newsletter send button functionality directly
-    const { rerender } = render(
+    render(
       <NewsletterSendButton
         postId="test-post-id"
         postTitle="Newsletter Integration Test Post"
@@ -368,7 +353,7 @@ describe('Newsletter Integration Tests', () => {
     // Test newsletter send error
     mockSendNewsletter.mockRejectedValueOnce(new Error('Email service unavailable'));
 
-    const { rerender } = render(
+    render(
       <NewsletterSendButton
         postId="test-post-id"
         postTitle="Error Test Post"
@@ -393,7 +378,7 @@ describe('Newsletter Integration Tests', () => {
 
     mockGetSubscriberCount.mockRejectedValueOnce(new Error('Failed to fetch subscriber count'));
 
-    rerender(
+    render(
       <BrowserRouter>
         <NewsletterManagementPage />
       </BrowserRouter>
