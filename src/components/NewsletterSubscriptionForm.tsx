@@ -10,7 +10,7 @@ export function NewsletterSubscriptionForm() {
     e.preventDefault();
     
     if (!email.trim()) {
-      setMessage({ type: 'error', text: 'Please enter your email address' });
+      setMessage({ type: 'error', text: 'Unesite vašu email adresu' });
       return;
     }
 
@@ -19,10 +19,10 @@ export function NewsletterSubscriptionForm() {
 
     try {
       await subscribeToNewsletter(email);
-      setMessage({ type: 'success', text: 'Successfully subscribed to newsletter!' });
+      setMessage({ type: 'success', text: 'Uspešno ste se prijavili na moj Newsletter!' });
       setEmail('');
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to subscribe';
+      const errorMessage = error instanceof Error ? error.message : 'Neuspešno';
       setMessage({ type: 'error', text: errorMessage });
     } finally {
       setLoading(false);
@@ -42,10 +42,10 @@ export function NewsletterSubscriptionForm() {
       >
         <div className="text-center mb-6">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-2" style={{ color: '#304b35' }}>
-            Stay Updated
+            Ostani Obavešten
           </h2>
           <p className="text-sm sm:text-base" style={{ color: '#507c58' }}>
-            Subscribe to get notified when new stories are published
+            Prijavite se da biste dobijali obaveštenja putem mail-a kada se objavi nova priča
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export function NewsletterSubscriptionForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
+                placeholder="Unesite vašu email adresu"
                 disabled={loading}
                 className="w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
@@ -95,14 +95,14 @@ export function NewsletterSubscriptionForm() {
               {loading ? (
                 <>
                   <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                  Subscribing...
+                  Prijavljivanje...
                 </>
               ) : (
                 <>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  Subscribe
+                  Prijavi me
                 </>
               )}
             </button>
