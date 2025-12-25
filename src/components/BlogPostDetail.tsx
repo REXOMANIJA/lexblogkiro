@@ -5,7 +5,8 @@ import { PhotoGallery } from './PhotoGallery';
 import { Comments } from './Comments';
 import { useAuth } from '../contexts/AuthContext';
 import { deletePost, fetchAllCategories } from '../services/supabase';
-import type { BlogPost, Category } from '../types';
+import { sendNewsletterEmail } from '../services/newsletter';
+import type { BlogPost, Category, NewsletterEmailData } from '../types';
 
 interface BlogPostDetailProps {
   post: BlogPost;
@@ -17,6 +18,8 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
   const [deleting, setDeleting] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
+  const [sendingNewsletter, setSendingNewsletter] = useState(false);
+  const [newsletterMessage, setNewsletterMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
     async function loadCategories() {
@@ -52,6 +55,49 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
 
   function handleEdit() {
     navigate(`/post/${post.id}/edit`);
+  }
+
+  // Helper function to extract first paragraph from HTML content
+  const extractFirstParagraph = (htmlContent: string): string => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    
+    const firstParagraph = tempDiv.querySelector('p');
+    if (firstParagraph && firstParagraph.textContent) {
+      return firstParagraph.textContent.trim();
+    }
+    
+    const textContent = tempDiv.textContent || tempDiv.innerText || '';
+    return textContent.trim();
+  };
+
+  async function handleSendNewsletter() {
+    setSendingNewsletter(true);
+    setNewsletterMessage(null);
+
+    try {
+      const postUrl = `${window.location.origin}/post/${post.id}`;
+      const siteTitle = 'Personal Blog';
+
+      const emailData: NewsletterEmailData = {
+        postId: post.id,
+        postTitle: post.title,
+        postContent: extractFirstParagraph(post.story),
+        postUrl,
+        siteTitle
+      };
+
+      await sendNewsletterEmail(emailData);
+      setNewsletterMessage({ 
+        type: 'success', 
+        text: 'Newsletter sent successfully to all subscribers!' 
+      });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send newsletter';
+      setNewsletterMessage({ type: 'error', text: errorMessage });
+    } finally {
+      setSendingNewsletter(false);
+    }
   }
 
   return (
@@ -128,6 +174,38 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
                   Edit
                 </button>
                 <button
+                  onClick={handleSendNewsletter}
+                  disabled={sendingNewsletter}
+                  className="flex items-center gap-2 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  style={{ backgroundColor: '#a5c6ab' }}
+                  onMouseEnter={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = '#6aa074';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!e.currentTarget.disabled) {
+                      e.currentTarget.style.backgroundColor = '#a5c6ab';
+                    }
+                  }}
+                  data-testid="newsletter-button"
+                  aria-label="Send newsletter"
+                >
+                  {sendingNewsletter ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      Newsletter
+                    </>
+                  )}
+                </button>
+                <button
                   onClick={handleDelete}
                   disabled={deleting}
                   className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
@@ -156,6 +234,39 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
             )}
           </div>
         </header>
+
+        {/* Newsletter message */}
+        {newsletterMessage && (
+          <div 
+            className={`mb-6 p-4 rounded-lg flex items-start gap-3 animate-scale-in`}
+            style={newsletterMessage.type === 'success' ? {
+              backgroundColor: 'rgba(106, 160, 116, 0.1)',
+              borderColor: 'rgba(106, 160, 116, 0.3)',
+              color: '#304b35',
+              border: '1px solid'
+            } : {
+              backgroundColor: 'rgba(220, 38, 127, 0.1)',
+              borderColor: 'rgba(220, 38, 127, 0.3)',
+              color: '#7f1d1d',
+              border: '1px solid'
+            }}
+            data-testid="newsletter-message"
+          >
+            <svg 
+              className="w-5 h-5 flex-shrink-0 mt-0.5" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              {newsletterMessage.type === 'success' ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              )}
+            </svg>
+            <p className="text-sm font-medium">{newsletterMessage.text}</p>
+          </div>
+        )}
 
         {/* Photo Gallery */}
         {post.photo_urls.length > 0 && (

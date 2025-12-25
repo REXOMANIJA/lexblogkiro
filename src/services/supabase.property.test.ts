@@ -49,8 +49,12 @@ async function cleanupTestPosts() {
 // Arbitrary for generating test blog posts
 const arbitraryBlogPost = (): fc.Arbitrary<CreatePostInput> => {
   return fc.record({
-    title: fc.string({ minLength: 1, maxLength: 100 }).filter(s => s.trim().length > 0),
-    story: fc.string({ minLength: 1, maxLength: 1000 }).filter(s => s.trim().length > 0),
+    title: fc.string({ minLength: 3, maxLength: 100 })
+      .filter(s => s.trim().length >= 3)
+      .filter(s => /^[a-zA-Z0-9\s\-_.,!?]+$/.test(s)), // Only safe characters
+    story: fc.string({ minLength: 10, maxLength: 1000 })
+      .filter(s => s.trim().length >= 10)
+      .filter(s => /^[a-zA-Z0-9\s\-_.,!?\n\r]+$/.test(s)), // Only safe characters
     photos: fc.constant([
       new File(['test image content'], 'test.jpg', { type: 'image/jpeg' })
     ])

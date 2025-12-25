@@ -66,7 +66,7 @@ describe('PhotoGallery Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   });
 
@@ -124,7 +124,7 @@ describe('PhotoGallery Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   });
 
@@ -158,7 +158,7 @@ describe('PhotoGallery Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   });
 });

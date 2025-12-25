@@ -59,3 +59,23 @@ export interface AuthState {
   isAdminMode: boolean;
   user: User | null;
 }
+
+// Newsletter subscription interfaces
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  subscribed_at: string;
+  is_active: boolean;
+}
+
+export interface NewsletterSubscriptionInput {
+  email: string;
+}
+
+export interface NewsletterEmailData {
+  postId: string;
+  postTitle: string;
+  postContent: string; // First paragraph
+  postUrl: string;
+  siteTitle: string;
+}

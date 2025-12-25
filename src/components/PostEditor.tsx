@@ -11,7 +11,7 @@ import type { CreatePostInput, UpdatePostInput, BlogPost, Category } from '../ty
 import { compressImages } from '../utils/imageCompression';
 
 interface PostEditorProps {
-  onSuccess?: () => void;
+  onSuccess?: (postId?: string) => void;
   editPost?: BlogPost;
   mode?: 'create' | 'edit';
 }
@@ -357,6 +357,11 @@ export function PostEditor({ onSuccess, editPost, mode = 'create' }: PostEditorP
 
         await updatePost(updateInput);
         setSuccess('Post updated successfully!');
+        
+        // Call onSuccess callback if provided
+        if (onSuccess) {
+          onSuccess();
+        }
       } else {
         // Create new post
         const postInput: CreatePostInput = {
@@ -367,16 +372,17 @@ export function PostEditor({ onSuccess, editPost, mode = 'create' }: PostEditorP
           category_ids: selectedCategoryIds,
         };
 
-        await createPost(postInput);
+        const newPost = await createPost(postInput);
         setSuccess('Post created successfully!');
         clearForm();
+        
+        // Call onSuccess with the new post ID
+        if (onSuccess) {
+          onSuccess(newPost.id);
+        }
       }
 
-      // Call onSuccess callback if provided
-      if (onSuccess) {
-        onSuccess();
-      }
-    } catch (err) {
+      } catch (err) {
       setError(err instanceof Error ? err.message : `Failed to ${mode === 'edit' ? 'update' : 'create'} post`);
     } finally {
       setIsSubmitting(false);

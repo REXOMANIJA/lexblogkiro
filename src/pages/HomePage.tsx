@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BlogPostListPaginated } from '../components/BlogPostListPaginated';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { LogoutButton } from '../components/LogoutButton';
+import { NewsletterSubscriptionForm } from '../components/NewsletterSubscriptionForm';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -94,8 +95,29 @@ export function HomePage() {
               </svg>
               Manage Categories
             </Link>
+            <Link
+              to="/newsletter"
+              className="inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5"
+              style={{ backgroundColor: '#a5c6ab', color: '#304b35' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#6aa074';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#a5c6ab';
+                e.currentTarget.style.color = '#304b35';
+              }}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              Newsletter
+            </Link>
           </div>
         )}
+
+        {/* Newsletter Subscription Form */}
+        <NewsletterSubscriptionForm />
 
         {/* Category Filter */}
         <div className="animate-slide-up" style={{ animationDelay: '0.05s' }}>

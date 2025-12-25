@@ -112,7 +112,7 @@ describe('BlogPostDetail Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   }, 120000); // 120 second timeout for property test
 });

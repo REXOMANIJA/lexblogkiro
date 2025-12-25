@@ -56,7 +56,10 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
     >
       {/* LEFT preview */}
       {leftIndex !== null && (
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[25%] sm:w-[20%] md:w-[18%] h-[80%] opacity-90 blur-sm scale-90 transition-all duration-500 flex items-center justify-center">
+        <div 
+          data-testid="adjacent-photo-left"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[25%] sm:w-[20%] md:w-[18%] h-[80%] opacity-90 blur-sm scale-90 transition-all duration-500 flex items-center justify-center"
+        >
           <img
             src={photos[leftIndex]}
             alt=""
@@ -67,7 +70,10 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
 
       {/* RIGHT preview */}
       {rightIndex !== null && (
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[25%] sm:w-[20%] md:w-[18%] h-[80%] opacity-90 blur-sm scale-90 transition-all duration-500 flex items-center justify-center">
+        <div 
+          data-testid="adjacent-photo-right"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[25%] sm:w-[20%] md:w-[18%] h-[80%] opacity-90 blur-sm scale-90 transition-all duration-500 flex items-center justify-center"
+        >
           <img
             src={photos[rightIndex]}
             alt=""
@@ -77,7 +83,10 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
       )}
 
       {/* CENTER image */}
-      <div className="relative z-20 w-[90vw] sm:w-[70vw] md:w-[80%] h-[80vh] max-h-[600px] transition-transform duration-500 flex items-center justify-center">
+      <div 
+        data-testid="center-photo"
+        className="relative z-20 w-[90vw] sm:w-[70vw] md:w-[80%] h-[80vh] max-h-[600px] transition-transform duration-500 flex items-center justify-center"
+      >
         <button
           onClick={next}
           className="absolute inset-0 z-30"
@@ -94,6 +103,7 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
       {len > 1 && (
         <>
           <button
+            data-testid="nav-arrow-prev"
             onClick={prev}
             className="absolute left-2 sm:left-4 z-40 rounded-full bg-black/40 p-2 sm:p-3 text-white hover:bg-black/60 flex items-center justify-center"
             aria-label="Previous photo"
@@ -101,6 +111,7 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
             ‹
           </button>
           <button
+            data-testid="nav-arrow-next"
             onClick={next}
             className="absolute right-2 sm:right-4 z-40 rounded-full bg-black/40 p-2 sm:p-3 text-white hover:bg-black/60 flex items-center justify-center"
             aria-label="Next photo"

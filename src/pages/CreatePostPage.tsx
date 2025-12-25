@@ -15,9 +15,13 @@ export function CreatePostPage() {
     }
   }, [isAdminMode, navigate]);
 
-  function handleSuccess() {
-    // Navigate back to home after successful creation
-    navigate('/');
+  function handleSuccess(postId?: string) {
+    // Navigate to the created post instead of home
+    if (postId) {
+      navigate(`/post/${postId}`);
+    } else {
+      navigate('/');
+    }
   }
 
   return (

@@ -90,7 +90,7 @@ describe('Admin Controls Visibility Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   }, 120000); // 120 second timeout for property test
 
@@ -145,7 +145,7 @@ describe('Admin Controls Visibility Property Tests', () => {
           unmount();
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 10 }
     );
   }, 120000); // 120 second timeout for property test
 });

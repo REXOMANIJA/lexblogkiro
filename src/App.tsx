@@ -7,6 +7,7 @@ import { PostDetailPage } from './pages/PostDetailPage';
 import { EditPostPage } from './pages/EditPostPage';
 import { CreatePostPage } from './pages/CreatePostPage';
 import { CategoryManagementPage } from './pages/CategoryManagementPage';
+import { NewsletterManagementPage } from './pages/NewsletterManagementPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/post/:id" element={<PostDetailPage />} />
             <Route path="/post/:id/edit" element={<EditPostPage />} />
             <Route path="/categories" element={<CategoryManagementPage />} />
+            <Route path="/newsletter" element={<NewsletterManagementPage />} />
             <Route path="/lex" element={<AdminLoginPage />} />
           </Routes>
         </BrowserRouter>
