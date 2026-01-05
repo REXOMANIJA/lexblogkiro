@@ -85,7 +85,7 @@ export function PostDetailPage() {
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Back to all posts
+            Nazad na početnu
           </Link>
         </div>
       </div>
@@ -115,7 +115,7 @@ export function PostDetailPage() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            <span className="font-medium">Back to all posts</span>
+            <span className="font-medium">Nazad na početnu</span>
           </Link>
         </div>
 

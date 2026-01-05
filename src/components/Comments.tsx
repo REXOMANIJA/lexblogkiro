@@ -142,19 +142,19 @@ export function Comments({ postId }: CommentsProps) {
   return (
     <div className="mt-12 sm:mt-16">
       <h3 className="text-2xl font-bold mb-6" style={{ color: '#304b35' }}>
-        Comments ({comments.length})
+        Komentari ({comments.length})
       </h3>
 
       {/* Comment Form */}
       <div className="rounded-xl p-6 shadow-md mb-8" style={{ backgroundColor: '#f0f5f1', borderColor: '#d2e2d5' }}>
         <h4 className="text-lg font-semibold mb-4" style={{ color: '#304b35' }}>
-          Leave a Comment
+          Ostavi komentar
         </h4>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="author-name" className="block text-sm font-medium mb-2" style={{ color: '#304b35' }}>
-              Your Name
+              Vaše ime
             </label>
             <input
               type="text"
@@ -175,7 +175,7 @@ export function Comments({ postId }: CommentsProps) {
                 e.currentTarget.style.borderColor = '#c3d9c7';
                 e.currentTarget.style.boxShadow = 'none';
               }}
-              placeholder="Enter your name"
+              placeholder="Unesi svoje ime"
               disabled={submitting}
               required
             />
@@ -183,7 +183,7 @@ export function Comments({ postId }: CommentsProps) {
 
           <div>
             <label htmlFor="comment-content" className="block text-sm font-medium mb-2" style={{ color: '#304b35' }}>
-              Comment
+              Komentar
             </label>
             <div className="relative">
               <textarea
@@ -206,7 +206,7 @@ export function Comments({ postId }: CommentsProps) {
                   e.currentTarget.style.borderColor = '#c3d9c7';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
-                placeholder="Write your comment..."
+                placeholder="Napiši svoj komentar..."
                 disabled={submitting}
                 required
               />
@@ -253,7 +253,7 @@ export function Comments({ postId }: CommentsProps) {
             onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#507c58')}
             onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#6aa074')}
           >
-            {submitting ? 'Posting...' : 'Post Comment'}
+            {submitting ? 'Posting...' : 'Postavi komentar'}
           </button>
         </form>
       </div>
@@ -265,7 +265,7 @@ export function Comments({ postId }: CommentsProps) {
         </div>
       ) : comments.length === 0 ? (
         <div className="text-center py-8" style={{ color: '#53815b' }}>
-          No comments yet. Be the first to comment!
+          Trenutno nema komentara. Budi ti prvi!
         </div>
       ) : (
         <div className="space-y-6">
@@ -324,7 +324,7 @@ export function Comments({ postId }: CommentsProps) {
                 
                 {userComments.includes(comment.id) && !isAdminMode && (
                   <span className="ml-2 text-xs font-medium" style={{ color: '#53815b' }}>
-                    Your comment
+                    Tvoj Komentar
                   </span>
                 )}
               </div>

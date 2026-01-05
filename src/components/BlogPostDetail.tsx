@@ -340,7 +340,7 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span>
-            Last updated: {new Date(post.updated_at).toLocaleDateString('en-US', {
+            Datum poslednje promene: {new Date(post.updated_at).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',

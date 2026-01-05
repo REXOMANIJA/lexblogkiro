@@ -318,7 +318,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
                     })}
                   </time>
                   <span className="text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1" style={{ color: '#53815b' }}>
-                    Read more
+                    Pročitaj više
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -371,7 +371,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
       {!hasMore && posts.length > 0 && (
         <div className="text-center py-8">
           <p className="text-sm" style={{ color: '#53815b' }}>
-            You've reached the end of the posts
+            Došao si do kraja objava
           </p>
         </div>
       )}

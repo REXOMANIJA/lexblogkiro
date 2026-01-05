@@ -80,7 +80,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
       <div className="flex flex-wrap items-center gap-3">
         {/* Filter label */}
         <span className="text-sm font-medium" style={{ color: '#304b35' }}>
-          Filter by category:
+          Filtriraj po kategoriji:
         </span>
 
         {/* Category chips */}
@@ -153,7 +153,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
-            Clear filters
+            Skloni filtere
           </button>
         )}
       </div>

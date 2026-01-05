@@ -50,10 +50,10 @@ export function HomePage() {
         {/* Header with enhanced styling */}
         <header className="mb-12 sm:mb-16 text-center animate-fade-in">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-3 sm:mb-4 tracking-tight" style={{ color: '#304b35' }}>
-            Lexove Putešestvije
+            Šunja i Siže
           </h1>
           <p className="text-lg sm:text-xl max-w-2xl mx-auto" style={{ color: '#507c58' }}>
-            Priče i slike moga života
+            Uglavnom kratke priče i poneka bajka
           </p>
           
           {/* Decorative divider */}
@@ -138,8 +138,12 @@ export function HomePage() {
       <footer className="mt-16 py-8 border-t" style={{ borderColor: '#d2e2d5' }}>
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm" style={{ color: '#53815b' }}>
-            © {new Date().getFullYear()} Adventures & Daily Life. All rights reserved.
+            Instagram: <a href='https://www.instagram.com/lex_2h4s/' style={{ color: '#53818b' }}>@lex_2h4s</a>
           </p>
+          <p className="text-sm" style={{ color: '#53815b' }}>
+            © {new Date().getFullYear()} Šunja i Siže. All rights reserved.
+            </p>
+            
         </div>
       </footer>
     </div>
