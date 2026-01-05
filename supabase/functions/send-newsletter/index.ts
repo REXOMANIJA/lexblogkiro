@@ -48,15 +48,16 @@ function generateEmailHTML(data: {
             border: 1px solid #e1ece3;
         }
         .header {
-            padding: 25px 30px 15px 30px;
-            border-bottom: 2px solid #f0f5f1;
+            padding: 20px 30px 10px 30px;
+            border-bottom: none;
         }
         .site-title {
             color: #507c58;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: normal;
             margin: 0;
             font-family: Georgia, serif;
+            font-style: italic;
         }
         .content-wrapper {
             padding: 30px;
@@ -78,21 +79,22 @@ function generateEmailHTML(data: {
         }
         .continue-reading {
             margin: 25px 0;
-            padding: 20px;
-            background-color: #f0f5f1;
-            border-radius: 6px;
-            border-left: 3px solid #6aa074;
+            padding: 15px;
+            background-color: transparent;
+            border-radius: 0;
+            border: none;
         }
         .continue-text {
-            color: #3a5a40;
-            font-size: 15px;
-            margin: 0 0 12px 0;
-            font-style: italic;
+            color: #507c58;
+            font-size: 16px;
+            margin: 0 0 8px 0;
+            font-style: normal;
+            font-weight: normal;
         }
         .post-link {
             color: #507c58;
             text-decoration: underline;
-            font-weight: 500;
+            font-weight: normal;
             font-size: 16px;
         }
         .post-link:hover {
@@ -140,7 +142,7 @@ function generateEmailHTML(data: {
 <body>
     <div class="email-container">
         <div class="header">
-            <p class="site-title">Lexov Blog</p>
+            <p class="site-title">Šunja i Siže</p>
         </div>
         
         <div class="content-wrapper">
@@ -151,13 +153,12 @@ function generateEmailHTML(data: {
             </div>
             
             <div class="continue-reading">
-                <p class="continue-text">Možete pročitati ceo tekst ovde:</p>
-                <a href="${data.postUrl}" class="post-link">Novi Post</a>
+                <p class="continue-text">Možete pročitati ceo tekst ovde: <a href="${data.postUrl}" class="post-link">${data.postTitle}</a></p>
             </div>
         </div>
         
         <div class="footer">
-            <p class="signature">Sve najbolje,<br>Lex</p>
+            <p class="signature">Sve najbolje,<br>Šunja i Siže</p>
             <p class="footer-note">Hvala na čitanju.</p>
             <a href="${data.unsubscribeUrl}" class="unsubscribe">Unsubscribe</a>
         </div>
@@ -197,11 +198,11 @@ If you'd prefer not to receive these updates, you can unsubscribe here: ${data.u
 }
 
 /**
- * Generate more personal subject line
+ * Generate clean subject line - just the post title
  */
 function generateEmailSubject(siteTitle: string, postTitle: string): string {
-  // Avoid promotional words, make it personal and simple
-  return postTitle.length > 50 ? postTitle.substring(0, 50) + '...' : postTitle;
+  // Just use the post title, no prefixes or variations
+  return postTitle.length > 50 ? postTitle.substring(0, 47) + '...' : postTitle;
 }
 
 /**
@@ -303,41 +304,56 @@ serve(async (req) => {
     const emailPromises = subscribers.map(async (subscriber) => {
       console.log(`Sending email to: ${subscriber.email}`)
       
+      const emailPayload = {
+        sender: {
+          name: "Šunja i Siže",
+          email: 'noreply@sunjaisize.com'
+        },
+        to: [
+          {
+            email: subscriber.email,
+            name: subscriber.email.split('@')[0] // Personalization
+          }
+        ],
+        subject: emailSubject,
+        htmlContent: emailHTML,
+        textContent: emailText,
+        // Optimize headers for Primary inbox placement
+        headers: {
+          'List-Unsubscribe': `<${unsubscribeUrl}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+          'X-Mailer': 'Personal Blog',
+          'Reply-To': 'noreply@sunjaisize.com',
+          'Message-ID': `<${Date.now()}-${Math.random().toString(36).substr(2, 9)}@sunjaisize.com>`,
+          'X-Priority': '3',
+          'X-MSMail-Priority': 'Normal',
+          'Importance': 'Normal'
+        },
+        // Add tags for better categorization
+        tags: ['personal-blog', 'newsletter']
+      }
+      
+      console.log('Email payload:', JSON.stringify(emailPayload, null, 2))
+      
       const response = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
           'api-key': brevoApiKey,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          sender: {
-            name: siteTitle,
-            email: 'rexomania1001@gmail.com'
-          },
-          to: [
-            {
-              email: subscriber.email
-            }
-          ],
-          subject: emailSubject,
-          htmlContent: emailHTML,
-          textContent: emailText,
-          headers: {
-            'List-Unsubscribe': `<${unsubscribeUrl}>`,
-            'X-Mailer': 'Lex',
-            'Reply-To': 'rexomania1001@gmail.com'
-          }
-        })
+        body: JSON.stringify(emailPayload)
       })
+
+      console.log(`Response status for ${subscriber.email}:`, response.status)
 
       if (!response.ok) {
         const errorText = await response.text()
         console.error(`Failed to send email to ${subscriber.email}:`, response.status, errorText)
-        return { email: subscriber.email, success: false, error: errorText }
+        return { email: subscriber.email, success: false, error: errorText, status: response.status }
       }
 
       const result = await response.json()
-      console.log(`Successfully sent email to: ${subscriber.email}`, result.messageId)
+      console.log(`Successfully sent email to: ${subscriber.email}`, result)
       return { email: subscriber.email, success: true, messageId: result.messageId }
     })
 
