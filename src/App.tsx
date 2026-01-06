@@ -9,7 +9,6 @@ import { CreatePostPage } from './pages/CreatePostPage';
 import { CategoryManagementPage } from './pages/CategoryManagementPage';
 import { NewsletterManagementPage } from './pages/NewsletterManagementPage';
 import { UnsubscribePage } from './pages/UnsubscribePage';
-import { UnsubscribePageSimple } from './pages/UnsubscribePageSimple';
 
 function App() {
   return (
