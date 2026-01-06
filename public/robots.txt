@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sunjaisize.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /lex
+Disallow: /newsletter
+Disallow: /categories
+Disallow: /post/new
+Disallow: /post/*/edit
