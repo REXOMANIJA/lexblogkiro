@@ -19,7 +19,7 @@ export function NewsletterSubscriptionForm() {
 
     try {
       await subscribeToNewsletter(email);
-      setMessage({ type: 'success', text: 'Uspešno ste se prijavili na moj Newsletter!' });
+      setMessage({ type: 'success', text: 'Uspešno ste se prijavili na Newsletter! Proverite email za potvrdu.' });
       setEmail('');
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Neuspešno';

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Unsubscribe Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f5f1;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #e8f4f8; border-color: #bee5eb; }
+        button {
+            background-color: #6aa074;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #507c58; }
+        #results { margin-top: 20px; }
+        .result-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #304b35;">🔍 Unsubscribe Debug Test</h1>
+        
+        <div class="test-section info">
+            <h3>Trenutni status aplikacije:</h3>
+            <p><strong>URL:</strong> http://localhost:5174</p>
+            <p><strong>Test vreme:</strong> <span id="testTime"></span></p>
+            <div id="appStatus">Testiranje...</div>
+        </div>
+
+        <div class="test-section">
+            <h3>Test 1: Osnovni pristup</h3>
+            <button onclick="testBasicAccess()">Test osnovnog pristupa</button>
+            <div id="basicResult"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Test 2: Unsubscribe ruta</h3>
+            <button onclick="testUnsubscribeRoute()">Test /unsubscribe rute</button>
+            <div id="unsubscribeResult"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Test 3: Direktan pristup</h3>
+            <button onclick="openUnsubscribePage()">Otvori /unsubscribe u novom tabu</button>
+            <button onclick="openUnsubscribeWithEmail()">Otvori /unsubscribe?email=test@example.com</button>
+        </div>
+
+        <div class="test-section">
+            <h3>Test 4: Iframe test</h3>
+            <button onclick="loadInIframe()">Učitaj u iframe</button>
+            <div id="iframeContainer" style="margin-top: 10px;"></div>
+        </div>
+
+        <div id="results">
+            <h3>Rezultati testova:</h3>
+            <div id="resultsList"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('testTime').textContent = new Date().toLocaleString();
+        
+        function addResult(test, status, message) {
+            const resultsList = document.getElementById('resultsList');
+            const resultItem = document.createElement('div');
+            resultItem.className = `result-item ${status}`;
+            resultItem.innerHTML = `<strong>${test}:</strong> ${message}`;
+            resultsList.appendChild(resultItem);
+        }
+
+        async function testBasicAccess() {
+            const resultDiv = document.getElementById('basicResult');
+            resultDiv.innerHTML = 'Testiranje...';
+            
+            try {
+                const response = await fetch('http://localhost:5174/');
+                if (response.ok) {
+                    const text = await response.text();
+                    resultDiv.innerHTML = `✅ Aplikacija radi! Status: ${response.status}`;
+                    addResult('Osnovni pristup', 'success', `Aplikacija dostupna (${response.status})`);
+                } else {
+                    resultDiv.innerHTML = `❌ Greška: ${response.status}`;
+                    addResult('Osnovni pristup', 'error', `HTTP ${response.status}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Greška: ${error.message}`;
+                addResult('Osnovni pristup', 'error', error.message);
+            }
+        }
+
+        async function testUnsubscribeRoute() {
+            const resultDiv = document.getElementById('unsubscribeResult');
+            resultDiv.innerHTML = 'Testiranje...';
+            
+            try {
+                const response = await fetch('http://localhost:5174/unsubscribe');
+                if (response.ok) {
+                    const text = await response.text();
+                    const hasReactContent = text.includes('react') || text.includes('React');
+                    resultDiv.innerHTML = `✅ Ruta dostupna! Status: ${response.status}, React: ${hasReactContent}`;
+                    addResult('Unsubscribe ruta', 'success', `Ruta dostupna (${response.status})`);
+                } else {
+                    resultDiv.innerHTML = `❌ Greška: ${response.status}`;
+                    addResult('Unsubscribe ruta', 'error', `HTTP ${response.status}`);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Greška: ${error.message}`;
+                addResult('Unsubscribe ruta', 'error', error.message);
+            }
+        }
+
+        function openUnsubscribePage() {
+            const newWindow = window.open('http://localhost:5174/unsubscribe', '_blank');
+            if (newWindow) {
+                addResult('Direktan pristup', 'success', 'Novi tab otvoren');
+            } else {
+                addResult('Direktan pristup', 'error', 'Popup blokiran');
+            }
+        }
+
+        function openUnsubscribeWithEmail() {
+            const newWindow = window.open('http://localhost:5174/unsubscribe?email=test@example.com', '_blank');
+            if (newWindow) {
+                addResult('Direktan pristup sa email', 'success', 'Novi tab otvoren');
+            } else {
+                addResult('Direktan pristup sa email', 'error', 'Popup blokiran');
+            }
+        }
+
+        function loadInIframe() {
+            const container = document.getElementById('iframeContainer');
+            container.innerHTML = '<iframe src="http://localhost:5174/unsubscribe" width="100%" height="400" style="border: 1px solid #ddd;"></iframe>';
+            addResult('Iframe test', 'info', 'Iframe učitan');
+        }
+
+        // Automatski test na učitavanje
+        window.onload = function() {
+            setTimeout(() => {
+                testBasicAccess();
+                setTimeout(() => {
+                    testUnsubscribeRoute();
+                }, 1000);
+            }, 500);
+        };
+    </script>
+</body>
+</html>

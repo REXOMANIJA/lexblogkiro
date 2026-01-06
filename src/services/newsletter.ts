@@ -23,12 +23,11 @@ export async function subscribeToNewsletter(email: string): Promise<void> {
     throw new Error('Invalid email format');
   }
 
-  // Check if email already exists
+  // Check if email already exists (active or inactive)
   const { data: existingSubscriber, error: checkError } = await supabase
     .from('newsletter_subscribers')
-    .select('id')
+    .select('id, is_active')
     .eq('email', trimmedEmail.toLowerCase())
-    .eq('is_active', true)
     .single();
 
   if (checkError && checkError.code !== 'PGRST116') { // PGRST116 = no rows returned
@@ -36,23 +35,40 @@ export async function subscribeToNewsletter(email: string): Promise<void> {
   }
 
   if (existingSubscriber) {
-    throw new Error('Email already subscribed');
+    if (existingSubscriber.is_active) {
+      throw new Error('Email already subscribed');
+    } else {
+      // Reactivate existing inactive subscription
+      const { error: updateError } = await supabase
+        .from('newsletter_subscribers')
+        .update({ is_active: true })
+        .eq('email', trimmedEmail.toLowerCase());
+
+      if (updateError) {
+        throw new Error(`Failed to reactivate subscription: ${updateError.message}`);
+      }
+    }
+  } else {
+    // Insert new subscriber
+    const { error: insertError } = await supabase
+      .from('newsletter_subscribers')
+      .insert({
+        email: trimmedEmail.toLowerCase(),
+        is_active: true
+      });
+
+    if (insertError) {
+      throw new Error(`Failed to subscribe: ${insertError.message}`);
+    }
   }
 
-  // Insert new subscriber
-  const { error: insertError } = await supabase
-    .from('newsletter_subscribers')
-    .insert({
-      email: trimmedEmail.toLowerCase(),
-      is_active: true
-    });
-
-  if (insertError) {
-    // Check if it's a duplicate key error and provide consistent message
-    if (insertError.message.includes('duplicate key') || insertError.message.includes('unique constraint')) {
-      throw new Error('Email already subscribed');
-    }
-    throw new Error(`Failed to subscribe: ${insertError.message}`);
+  // Send confirmation email
+  try {
+    await sendSubscriptionConfirmation(trimmedEmail);
+  } catch (confirmationError) {
+    // Log the error but don't fail the subscription
+    console.error('Failed to send confirmation email:', confirmationError);
+    // The subscription was successful, so we don't throw here
   }
 }
 
@@ -113,5 +129,82 @@ export async function sendNewsletterEmail(emailData: NewsletterEmailData): Promi
       throw error;
     }
     throw new Error('Unknown error occurred while sending newsletter');
+  }
+}
+
+/**
+ * Send subscription confirmation email
+ */
+export async function sendSubscriptionConfirmation(email: string): Promise<void> {
+  try {
+    const siteTitle = 'Šunja i Siže';
+    const siteUrl = window.location.origin;
+
+    // Call the Supabase Edge Function for confirmation
+    const { data, error } = await supabase.functions.invoke('send-subscription-confirmation', {
+      body: {
+        email,
+        siteTitle,
+        siteUrl
+      }
+    });
+
+    if (error) {
+      throw new Error(`Failed to send confirmation email: ${error.message}`);
+    }
+
+    if (data?.error) {
+      throw new Error(`Confirmation email sending failed: ${data.error}`);
+    }
+
+    console.log('Confirmation email sent successfully to:', email);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Unknown error occurred while sending confirmation email');
+  }
+}
+
+/**
+ * Unsubscribe a user from the newsletter
+ */
+export async function unsubscribeFromNewsletter(email: string): Promise<void> {
+  // Validate email format
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  
+  if (!email || email.trim() === '' || !emailRegex.test(email.trim())) {
+    throw new Error('Invalid email format');
+  }
+
+  const trimmedEmail = email.trim().toLowerCase();
+
+  // Check if email exists and is active
+  const { data: existingSubscriber, error: checkError } = await supabase
+    .from('newsletter_subscribers')
+    .select('id, is_active')
+    .eq('email', trimmedEmail)
+    .single();
+
+  if (checkError && checkError.code !== 'PGRST116') { // PGRST116 = no rows returned
+    throw new Error(`Database error: ${checkError.message}`);
+  }
+
+  if (!existingSubscriber) {
+    throw new Error('Email not found in our newsletter list');
+  }
+
+  if (!existingSubscriber.is_active) {
+    throw new Error('Email is already unsubscribed');
+  }
+
+  // Deactivate the subscription
+  const { error: updateError } = await supabase
+    .from('newsletter_subscribers')
+    .update({ is_active: false })
+    .eq('email', trimmedEmail);
+
+  if (updateError) {
+    throw new Error(`Failed to unsubscribe: ${updateError.message}`);
   }
 }

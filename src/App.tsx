@@ -8,6 +8,8 @@ import { EditPostPage } from './pages/EditPostPage';
 import { CreatePostPage } from './pages/CreatePostPage';
 import { CategoryManagementPage } from './pages/CategoryManagementPage';
 import { NewsletterManagementPage } from './pages/NewsletterManagementPage';
+import { UnsubscribePage } from './pages/UnsubscribePage';
+import { UnsubscribePageSimple } from './pages/UnsubscribePageSimple';
 
 function App() {
   return (
@@ -21,7 +23,13 @@ function App() {
             <Route path="/post/:id/edit" element={<EditPostPage />} />
             <Route path="/categories" element={<CategoryManagementPage />} />
             <Route path="/newsletter" element={<NewsletterManagementPage />} />
+            <Route path="/unsubscribe" element={<UnsubscribePage />} />
             <Route path="/lex" element={<AdminLoginPage />} />
+            <Route path="*" element={<div style={{padding: '20px', textAlign: 'center'}}>
+              <h1>404 - Stranica nije pronađena</h1>
+              <p>Ruta: {window.location.pathname}</p>
+              <a href="/">Nazad na početnu</a>
+            </div>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

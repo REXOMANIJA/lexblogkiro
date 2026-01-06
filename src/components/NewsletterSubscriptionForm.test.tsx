@@ -19,22 +19,22 @@ describe('NewsletterSubscriptionForm', () => {
     render(<NewsletterSubscriptionForm />);
 
     // Check for main heading
-    expect(screen.getByText('Stay Updated')).toBeInTheDocument();
+    expect(screen.getByText('Ostani Obavešten')).toBeInTheDocument();
     
     // Check for description
-    expect(screen.getByText('Subscribe to get notified when new stories are published')).toBeInTheDocument();
+    expect(screen.getByText('Prijavite se da biste dobijali obaveštenja putem mail-a kada se objavi nova priča')).toBeInTheDocument();
     
     // Check for email input
     const emailInput = screen.getByTestId('email-input');
     expect(emailInput).toBeInTheDocument();
     expect(emailInput).toHaveAttribute('type', 'email');
-    expect(emailInput).toHaveAttribute('placeholder', 'Enter your email address');
+    expect(emailInput).toHaveAttribute('placeholder', 'Unesite vašu email adresu');
     
     // Check for subscribe button
     const subscribeButton = screen.getByTestId('subscribe-button');
     expect(subscribeButton).toBeInTheDocument();
     expect(subscribeButton).toHaveAttribute('type', 'submit');
-    expect(subscribeButton).toHaveTextContent('Subscribe');
+    expect(subscribeButton).toHaveTextContent('Prijavi me');
     
     // Check for email icon in button
     const emailIcon = subscribeButton.querySelector('svg');
@@ -60,7 +60,7 @@ describe('NewsletterSubscriptionForm', () => {
 
     // Check loading state
     await waitFor(() => {
-      expect(subscribeButton).toHaveTextContent('Subscribing...');
+      expect(subscribeButton).toHaveTextContent('Prijavljivanje...');
       expect(subscribeButton).toBeDisabled();
     });
 
@@ -68,7 +68,7 @@ describe('NewsletterSubscriptionForm', () => {
     await waitFor(() => {
       const message = screen.getByTestId('message');
       expect(message).toBeInTheDocument();
-      expect(message).toHaveTextContent('Successfully subscribed to newsletter!');
+      expect(message).toHaveTextContent('Uspešno ste se prijavili na Newsletter! Proverite email za potvrdu.');
     });
 
     // Verify service was called with correct email
@@ -79,7 +79,7 @@ describe('NewsletterSubscriptionForm', () => {
     
     // Verify button is no longer disabled
     expect(subscribeButton).not.toBeDisabled();
-    expect(subscribeButton).toHaveTextContent('Subscribe');
+    expect(subscribeButton).toHaveTextContent('Prijavi me');
   });
 
   // Test error handling scenarios
@@ -129,7 +129,7 @@ describe('NewsletterSubscriptionForm', () => {
     await waitFor(() => {
       const message = screen.getByTestId('message');
       expect(message).toBeInTheDocument();
-      expect(message).toHaveTextContent('Please enter your email address');
+      expect(message).toHaveTextContent('Unesite vašu email adresu');
     });
 
     // Verify service was not called
@@ -152,7 +152,7 @@ describe('NewsletterSubscriptionForm', () => {
     await waitFor(() => {
       const message = screen.getByTestId('message');
       expect(message).toBeInTheDocument();
-      expect(message).toHaveTextContent('Please enter your email address');
+      expect(message).toHaveTextContent('Unesite vašu email adresu');
     });
 
     // Verify service was not called
@@ -176,7 +176,7 @@ describe('NewsletterSubscriptionForm', () => {
     await waitFor(() => {
       const message = screen.getByTestId('message');
       expect(message).toBeInTheDocument();
-      expect(message).toHaveTextContent('Successfully subscribed to newsletter!');
+      expect(message).toHaveTextContent('Uspešno ste se prijavili na Newsletter! Proverite email za potvrdu.');
     });
 
     // Verify service was called
@@ -204,7 +204,7 @@ describe('NewsletterSubscriptionForm', () => {
     await waitFor(() => {
       expect(subscribeButton).toBeDisabled();
       expect(emailInput).toBeDisabled();
-      expect(subscribeButton).toHaveTextContent('Subscribing...');
+      expect(subscribeButton).toHaveTextContent('Prijavljivanje...');
     });
 
     // Wait for completion

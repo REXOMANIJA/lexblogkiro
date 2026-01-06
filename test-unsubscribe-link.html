@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Unsubscribe Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f5f1;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .link-test {
+            display: block;
+            background-color: #6aa074;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .link-test:hover {
+            background-color: #507c58;
+        }
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #6aa074;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #304b35; text-align: center;">Test Unsubscribe Linkova</h1>
+        
+        <div class="info">
+            <h3>Aplikacija radi na:</h3>
+            <p><strong>http://localhost:5174</strong></p>
+            <p>Testiraj ove linkove:</p>
+        </div>
+        
+        <a href="http://localhost:5174/unsubscribe" class="link-test" target="_blank">
+            🔗 Test: /unsubscribe (manuelna odjava)
+        </a>
+        
+        <a href="http://localhost:5174/unsubscribe?email=test@example.com" class="link-test" target="_blank">
+            🔗 Test: /unsubscribe?email=test@example.com (automatska odjava)
+        </a>
+        
+        <a href="http://localhost:5174/" class="link-test" target="_blank">
+            🏠 Test: Početna stranica
+        </a>
+        
+        <div class="info">
+            <h3>Šta treba da se desi:</h3>
+            <ol>
+                <li><strong>Prvi link</strong> - otvara stranicu sa formom za unos email-a</li>
+                <li><strong>Drugi link</strong> - automatski pokušava da odjavi test@example.com</li>
+                <li><strong>Treći link</strong> - otvara početnu stranicu (za poređenje)</li>
+            </ol>
+            
+            <h3>Ako se ništa ne otvara:</h3>
+            <ul>
+                <li>Proverite da li aplikacija radi na http://localhost:5174</li>
+                <li>Proverite browser konzolu za greške (F12)</li>
+                <li>Pokušajte da kopirate link u novi tab</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 15px; background-color: #fff3cd; border-radius: 5px;">
+            <h4 style="color: #856404; margin: 0 0 10px 0;">Debug Info:</h4>
+            <p style="color: #856404; margin: 5px 0;">
+                <strong>Trenutno vreme:</strong> <span id="currentTime"></span>
+            </p>
+            <p style="color: #856404; margin: 5px 0;">
+                <strong>User Agent:</strong> <span id="userAgent"></span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('currentTime').textContent = new Date().toLocaleString();
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+        
+        // Test da li možemo da pristupimo aplikaciji
+        fetch('http://localhost:5174/')
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ Aplikacija je dostupna na localhost:5174');
+                } else {
+                    console.log('❌ Aplikacija nije dostupna - status:', response.status);
+                }
+            })
+            .catch(error => {
+                console.log('❌ Greška pri pristupu aplikaciji:', error);
+            });
+    </script>
+</body>
+</html>

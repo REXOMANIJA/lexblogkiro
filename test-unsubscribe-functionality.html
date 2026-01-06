@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Unsubscribe Functionality</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f5f1;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #e8f4f8; border-color: #bee5eb; }
+        button {
+            background-color: #6aa074;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #507c58; }
+        input[type="email"] {
+            width: 300px;
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #304b35;">🧪 Test Unsubscribe Functionality</h1>
+        
+        <div class="test-section info">
+            <h3>Korak 1: Proverite postojeće pretplatnike</h3>
+            <button onclick="checkSubscribers()">Prikaži sve pretplatnike</button>
+            <div id="subscribersResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Korak 2: Dodajte test pretplatnika</h3>
+            <input type="email" id="testEmail" placeholder="test@example.com" value="test@example.com">
+            <button onclick="addTestSubscriber()">Dodaj test pretplatnika</button>
+            <div id="addResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Korak 3: Testiraj odjavljivanje</h3>
+            <input type="email" id="unsubEmail" placeholder="email za odjavu" value="test@example.com">
+            <button onclick="testUnsubscribe()">Odjavi pretplatnika</button>
+            <div id="unsubResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Korak 4: Proverite status nakon odjave</h3>
+            <button onclick="checkSubscribers()">Proverite ponovo pretplatnike</button>
+        </div>
+
+        <div class="test-section info">
+            <h3>Debug informacije:</h3>
+            <div id="debugInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://dtatnhzupgwizypqvvzw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0YXRuaHp1cGd3aXp5cHF2dnp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxMjcxNTIsImV4cCI6MjA4MDcwMzE1Mn0.wIKbttTe1gdDxv6gwFFtIlHr6sH91Qx7XDW1n3L4cMY';
+
+        function showResult(elementId, content, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = content;
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+
+        async function checkSubscribers() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers?select=*`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const activeCount = data.filter(sub => sub.is_active).length;
+                    const inactiveCount = data.filter(sub => !sub.is_active).length;
+                    
+                    let content = `<h4>Pretplatnici u bazi:</h4>`;
+                    content += `<p><strong>Aktivni:</strong> ${activeCount} | <strong>Neaktivni:</strong> ${inactiveCount}</p>`;
+                    content += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    
+                    showResult('subscribersResult', content, 'success');
+                } else {
+                    const errorText = await response.text();
+                    showResult('subscribersResult', `❌ Greška: ${response.status} - ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('subscribersResult', `❌ Greška: ${error.message}`, 'error');
+            }
+        }
+
+        async function addTestSubscriber() {
+            const email = document.getElementById('testEmail').value;
+            if (!email) {
+                showResult('addResult', '❌ Unesite email adresu', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({
+                        email: email.toLowerCase(),
+                        is_active: true
+                    })
+                });
+
+                if (response.ok || response.status === 201) {
+                    showResult('addResult', `✅ Test pretplatnik ${email} je dodat!`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    if (errorText.includes('duplicate') || errorText.includes('unique')) {
+                        showResult('addResult', `⚠️ Email ${email} već postoji u bazi`, 'info');
+                    } else {
+                        showResult('addResult', `❌ Greška: ${response.status} - ${errorText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                showResult('addResult', `❌ Greška: ${error.message}`, 'error');
+            }
+        }
+
+        async function testUnsubscribe() {
+            const email = document.getElementById('unsubEmail').value;
+            if (!email) {
+                showResult('unsubResult', '❌ Unesite email adresu', 'error');
+                return;
+            }
+
+            try {
+                // Prvo proverite da li email postoji
+                const checkResponse = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers?email=eq.${email.toLowerCase()}&select=*`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (checkResponse.ok) {
+                    const checkData = await checkResponse.json();
+                    if (checkData.length === 0) {
+                        showResult('unsubResult', `❌ Email ${email} nije pronađen u bazi`, 'error');
+                        return;
+                    }
+
+                    const subscriber = checkData[0];
+                    if (!subscriber.is_active) {
+                        showResult('unsubResult', `⚠️ Email ${email} je već odjavljeno`, 'info');
+                        return;
+                    }
+
+                    // Sada pokušajte da odjavite
+                    const updateResponse = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers?email=eq.${email.toLowerCase()}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        },
+                        body: JSON.stringify({
+                            is_active: false
+                        })
+                    });
+
+                    if (updateResponse.ok) {
+                        showResult('unsubResult', `✅ Email ${email} je uspešno odjavljen!`, 'success');
+                    } else {
+                        const errorText = await updateResponse.text();
+                        showResult('unsubResult', `❌ Greška pri odjavi: ${updateResponse.status} - ${errorText}`, 'error');
+                    }
+                } else {
+                    const errorText = await checkResponse.text();
+                    showResult('unsubResult', `❌ Greška pri proveri: ${checkResponse.status} - ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('unsubResult', `❌ Greška: ${error.message}`, 'error');
+            }
+        }
+
+        // Debug info
+        document.getElementById('debugInfo').innerHTML = `
+            <p><strong>Supabase URL:</strong> ${SUPABASE_URL}</p>
+            <p><strong>Vreme:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>Browser:</strong> ${navigator.userAgent}</p>
+        `;
+    </script>
+</body>
+</html>

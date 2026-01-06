@@ -160,7 +160,7 @@ function generateEmailHTML(data: {
         <div class="footer">
             <p class="signature">Sve najbolje,<br>Šunja i Siže</p>
             <p class="footer-note">Hvala na čitanju.</p>
-            <a href="${data.unsubscribeUrl}" class="unsubscribe">Unsubscribe</a>
+            <a href="${data.unsubscribeUrl}" class="unsubscribe">Odjavite se sa newsletter-a</a>
         </div>
     </div>
 </body>
