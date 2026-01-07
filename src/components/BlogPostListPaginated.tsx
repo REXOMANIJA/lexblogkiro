@@ -190,7 +190,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Trenutno nema objava</h3>
+        <h3 className="text-2xl font-semibold text-gray-700 mb-2">Trenutno nema objava</h3>
         <p className="max-w-md mx-auto" style={{ color: '#53815b' }}>
           Vrati se ubrzo kada se dodaju! Prijavi se na newsletter da bi dobio obavestenje o novim kada izadju!
         </p>
@@ -217,7 +217,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Trenutno nema objava</h3>
+        <h3 className="text-2xl font-semibold text-gray-700 mb-2">Trenutno nema objava</h3>
         <p className="max-w-md mx-auto" style={{ color: '#53815b' }}>
           Nema objava u izabranoj kategoriji. Probaj skloniti filtere da bi video sve objave.
         </p>
