@@ -190,14 +190,14 @@ function generateConfirmationHTML(data: {
     <div class="email-container">
         <div class="header">
             <h1 class="site-title">${data.siteTitle}</h1>
-            <p class="welcome-subtitle">Dobrodošli na moj Newsletter</p>
         </div>
         
         <div class="content-wrapper">
-            <h2 class="welcome-title">🎉 Uspešno ste se prijavili!</h2>
+            <h2 class="welcome-title">Uspešno ste se prijavili! 🪶</h2>
             
             <div class="welcome-message">
-                <p>Hvala vam što ste se prijavili na moj newsletter! Drago nam je što želite da budete u toku sa mojim najnovijim pričama i mislima.</p>
+                <p>Hvala vam što ste se prijavili na moj newsletter! </p>
+                <p>Protagonista lično, za vas. Svih šest. </p>
             </div>
             
             <div class="confirmation-box">
@@ -208,21 +208,20 @@ function generateConfirmationHTML(data: {
             <div class="what-to-expect">
                 <h3 class="expect-title">Šta možete očekivati:</h3>
                 <ul class="expect-list">
-                    <li>Obaveštenja o novim blog postovima čim se objave</li>
-                    <li>Nikakav spam - šaljemo samo kvalitetan sadržaj</li>
-                    <li>Možete se odjaviti u bilo kom trenutku jednim klikom</li>
+                    <li>Obaveštenja o novim blog postovima čim se objave (Ne beri brigu čitaoče, neće biti često.)</li>
+                    <li>Nikakav spam - ovo je hobi. Moj pisanje, tvoj čitanje.</li>
+                    <li>Ako ste slučajno kliknuli prijavu na newsletter, evo odjavi se ispod: </li>
                 </ul>
             </div>
-            
+            <a href="${data.unsubscribeUrl}" class="unsubscribe">Odjavite se sa newsletter-a</a>
             <div class="visit-site">
                 <a href="${data.siteUrl}" class="site-link">Posetite blog</a>
             </div>
         </div>
         
         <div class="footer">
-            <p class="signature">Hvala na poverenju,<br><strong>${data.siteTitle}</strong></p>
+            <p class="signature">Hvala na poverenju,<br><strong>A.M. LEX</strong></p>
             <p class="footer-note">Ovo je automatska poruka potvrde. Molimo vas da ne odgovarate na ovaj email.</p>
-            <a href="${data.unsubscribeUrl}" class="unsubscribe">Odjavite se sa newsletter-a</a>
         </div>
     </div>
 </body>
@@ -324,7 +323,7 @@ serve(async (req) => {
           name: email.split('@')[0]
         }
       ],
-      subject: `Dobrodošli u ${siteTitle} Newsletter! 🎉`,
+      subject: `Dobrodošli u ${siteTitle} Newsletter! 🪶`,
       htmlContent: emailHTML,
       textContent: emailText,
       headers: {
