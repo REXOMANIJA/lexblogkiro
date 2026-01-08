@@ -371,7 +371,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
       {!hasMore && posts.length > 0 && (
         <div className="text-center py-8">
           <p className="text-sm" style={{ color: '#53815b' }}>
-            Došao si do kraja objava. Prijavi se na newsletter da bi dobio obavestenje o novim kada izadju!
+            Došao si do kraja objava. Prijavi se na newsletter da bi dobio obaveštenje o novim kada izadju!
           </p>
         </div>
       )}

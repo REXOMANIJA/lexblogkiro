@@ -161,7 +161,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
       {/* Active filters summary */}
       {selectedCategoryIds.length > 0 && (
         <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Showing posts in {selectedCategoryIds.length} {selectedCategoryIds.length === 1 ? 'category' : 'categories'}
+          Prikazuju se postovi u {selectedCategoryIds.length} {selectedCategoryIds.length === 1 ? 'categoriji' : 'categorije'}
         </div>
       )}
     </div>
