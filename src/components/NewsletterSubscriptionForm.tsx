@@ -42,10 +42,10 @@ export function NewsletterSubscriptionForm() {
       >
         <div className="text-center mb-6">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-2" style={{ color: '#304b35' }}>
-            Ostani Obavešten
+            UHVATI ME BRŽE
           </h2>
           <p className="text-sm sm:text-base" style={{ color: '#507c58' }}>
-            Prijavite se da biste dobijali obaveštenja putem mail-a kada se objavi nova priča
+            Budite prvi obavešteni, pročitajte i one reči koje poslažem pre nego se predomislim
           </p>
         </div>
 
