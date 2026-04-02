@@ -92,6 +92,19 @@ export function PostEditor({ onSuccess, editPost, mode = 'create' }: PostEditorP
       attributes: {
         class: 'focus:outline-none min-h-[250px] px-4 py-2.5 text-slate-800 leading-relaxed',
       },
+      handleKeyDown: (view, event) => {
+        // Handle Enter key to create line break instead of new paragraph
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          view.dispatch(
+            view.state.tr.replaceSelectionWith(
+              view.state.schema.nodes.hardBreak.create()
+            )
+          );
+          return true;
+        }
+        return false;
+      },
     },
     onUpdate: ({ editor }) => {
       // Clear story error when user types

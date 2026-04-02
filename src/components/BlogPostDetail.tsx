@@ -294,10 +294,19 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
         .prose {
           color: #304b35 !important;
         }
-        .prose p {
+        .prose p, .prose div {
           color: #304b35 !important;
-          margin-bottom: 1.25em;
+          margin-top: 0;
+          margin-bottom: 0;
           line-height: 1.75;
+        }
+        .prose br {
+          display: block;
+          margin-bottom: 0;
+          content: "";
+        }
+        .prose br + br {
+          margin-bottom: 1em;
         }
         .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
           color: #304b35 !important;
@@ -330,6 +339,9 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
         .prose code {
           color: #304b35 !important;
           background-color: #e1ece3 !important;
+        }
+        .prose br {
+          line-height: 1.75;
         }
       `}</style>
 
