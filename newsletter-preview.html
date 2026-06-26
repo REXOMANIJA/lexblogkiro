@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Email Preview</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #1e2f21;
+            margin: 0;
+            padding: 20px;
+            background-color: #f6f8f7;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(48, 75, 53, 0.08);
+            overflow: hidden;
+        }
+        .header {
+            padding: 24px 32px 16px 32px;
+            background: linear-gradient(135deg, #f0f5f1 0%, #ffffff 100%);
+            border-bottom: 2px solid #6aa074;
+        }
+        .site-title {
+            color: #304b35;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        .content-wrapper {
+            padding: 32px;
+        }
+        .post-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e2f21;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+            font-family: Georgia, serif;
+        }
+        .post-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #304b35;
+            margin-bottom: 28px;
+            font-family: Georgia, serif;
+        }
+        .continue-reading {
+            margin: 28px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f5f1 0%, #e1ece3 100%);
+            border-radius: 8px;
+            border-left: 4px solid #6aa074;
+        }
+        .continue-text {
+            color: #304b35;
+            font-size: 16px;
+            margin: 0;
+            font-style: normal;
+            font-weight: normal;
+        }
+        .post-link {
+            color: #507c58;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-bottom: 2px solid #6aa074;
+            transition: all 0.2s;
+        }
+        .post-link:hover {
+            color: #6aa074;
+            border-bottom-color: #304b35;
+        }
+        .footer {
+            padding: 28px 32px;
+            border-top: 2px solid #e1ece3;
+            background: linear-gradient(135deg, #f0f5f1 0%, #ffffff 100%);
+        }
+        .signature {
+            color: #1e2f21;
+            font-size: 15px;
+            margin: 0 0 20px 0;
+            font-family: Georgia, serif;
+            font-weight: 500;
+        }
+        .footer-note {
+            color: #507c58;
+            font-size: 13px;
+            margin: 15px 0 0 0;
+            font-style: italic;
+        }
+        .unsubscribe {
+            color: #6aa074;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 15px;
+            display: inline-block;
+            border-bottom: 1px solid #6aa074;
+            transition: all 0.2s;
+        }
+        .unsubscribe:hover {
+            color: #507c58;
+            border-bottom-color: #507c58;
+        }
+        
+        /* Mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .header, .content-wrapper, .footer {
+                padding: 20px;
+            }
+            .post-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <p class="site-title">Šunja i Siže</p>
+        </div>
+        
+        <div class="content-wrapper">
+            <h1 class="post-title">Primer naslova blog posta</h1>
+            
+            <div class="post-content">
+                <p>Ovo je primer prvog paragrafa blog posta. Ovde će biti prikazan uvodni deo teksta koji će čitaoci videti u newsletter email-u. Tekst je dovoljno dug da prikaže kako će izgledati formatiranje i razmak između redova.</p>
+            </div>
+            
+            <div class="continue-reading">
+                <p class="continue-text">Možete pročitati ceo tekst ovde: <a href="#" class="post-link">Primer naslova blog posta</a></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p class="signature">Hvala na poverenju,<br>A.M. LEX</p>
+            <p class="footer-note">Hvala na čitanju.</p>
+            <a href="#" class="unsubscribe">Odjavite se sa newsletter-a</a>
+        </div>
+    </div>
+</body>
+</html>

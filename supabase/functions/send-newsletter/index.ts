@@ -35,94 +35,107 @@ function generateEmailHTML(data: {
         body {
             font-family: Georgia, 'Times New Roman', serif;
             line-height: 1.7;
-            color: #304b35;
+            color: #1e2f21;
             margin: 0;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: #f6f8f7;
         }
         .email-container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e1ece3;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(48, 75, 53, 0.08);
+            overflow: hidden;
         }
         .header {
-            padding: 20px 30px 10px 30px;
-            border-bottom: none;
+            padding: 24px 32px 16px 32px;
+            background: linear-gradient(135deg, #f0f5f1 0%, #ffffff 100%);
+            border-bottom: 2px solid #6aa074;
         }
         .site-title {
-            color: #507c58;
-            font-size: 16px;
-            font-weight: normal;
+            color: #304b35;
+            font-size: 18px;
+            font-weight: 600;
             margin: 0;
             font-family: Georgia, serif;
             font-style: italic;
+            letter-spacing: 0.5px;
         }
         .content-wrapper {
-            padding: 30px;
+            padding: 32px;
         }
         .post-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #304b35;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e2f21;
             margin: 0 0 20px 0;
-            line-height: 1.4;
+            line-height: 1.3;
             font-family: Georgia, serif;
         }
         .post-content {
             font-size: 16px;
-            line-height: 1.7;
-            color: #507c58;
-            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #304b35;
+            margin-bottom: 28px;
             font-family: Georgia, serif;
         }
         .continue-reading {
-            margin: 25px 0;
-            padding: 15px;
-            background-color: transparent;
-            border-radius: 0;
-            border: none;
+            margin: 28px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f5f1 0%, #e1ece3 100%);
+            border-radius: 8px;
+            border-left: 4px solid #6aa074;
         }
         .continue-text {
-            color: #507c58;
+            color: #304b35;
             font-size: 16px;
-            margin: 0 0 8px 0;
+            margin: 0;
             font-style: normal;
             font-weight: normal;
         }
         .post-link {
             color: #507c58;
-            text-decoration: underline;
-            font-weight: normal;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 16px;
+            border-bottom: 2px solid #6aa074;
+            transition: all 0.2s;
         }
         .post-link:hover {
-            color: #3a5a40;
+            color: #6aa074;
+            border-bottom-color: #304b35;
         }
         .footer {
-            padding: 25px 30px;
-            border-top: 1px solid #e1ece3;
-            background-color: #f0f5f1;
+            padding: 28px 32px;
+            border-top: 2px solid #e1ece3;
+            background: linear-gradient(135deg, #f0f5f1 0%, #ffffff 100%);
         }
         .signature {
-            color: #3a5a40;
+            color: #1e2f21;
             font-size: 15px;
             margin: 0 0 20px 0;
             font-family: Georgia, serif;
+            font-weight: 500;
         }
         .footer-note {
-            color: #6aa074;
+            color: #507c58;
             font-size: 13px;
             margin: 15px 0 0 0;
             font-style: italic;
         }
         .unsubscribe {
             color: #6aa074;
-            text-decoration: underline;
+            text-decoration: none;
             font-size: 12px;
             margin-top: 15px;
             display: inline-block;
+            border-bottom: 1px solid #6aa074;
+            transition: all 0.2s;
+        }
+        .unsubscribe:hover {
+            color: #507c58;
+            border-bottom-color: #507c58;
         }
         
         /* Mobile responsiveness */
@@ -158,7 +171,7 @@ function generateEmailHTML(data: {
         </div>
         
         <div class="footer">
-            <p class="signature">Sve najbolje,<br>Šunja i Siže</p>
+            <p class="signature">Hvala na poverenju,<br>A.M. LEX</p>
             <p class="footer-note">Hvala na čitanju.</p>
             <a href="${data.unsubscribeUrl}" class="unsubscribe">Odjavite se sa newsletter-a</a>
         </div>
