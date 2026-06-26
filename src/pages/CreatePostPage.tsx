@@ -25,16 +25,16 @@ export function CreatePostPage() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 animate-fade-in">
           <Link 
             to="/" 
             className="inline-flex items-center gap-2 font-medium transition-colors group"
-            style={{ color: '#53815b' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#304b35'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#53815b'}
+            style={{ color: '#c2d0bd' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#caa873'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#c2d0bd'}
           >
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

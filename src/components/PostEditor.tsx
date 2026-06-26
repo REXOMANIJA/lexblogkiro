@@ -403,8 +403,8 @@ export function PostEditor({ onSuccess, editPost, mode = 'create' }: PostEditorP
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8 animate-fade-in">
-      <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6 sm:mb-8">
+    <div className="max-w-4xl mx-auto rounded-xl shadow-lg p-6 sm:p-8 animate-fade-in border" style={{ backgroundColor: 'rgba(230, 223, 208, 0.94)', borderColor: 'rgba(176, 141, 87, 0.35)', boxShadow: '0 18px 40px -12px rgba(0, 0, 0, 0.28), 0 4px 10px -4px rgba(0, 0, 0, 0.15)' }}>
+      <h2 className="font-display text-3xl sm:text-4xl font-semibold mb-6 sm:mb-8" style={{ color: '#304b35' }}>
         {mode === 'edit' ? 'Edit Post' : 'Create New Post'}
       </h2>
 

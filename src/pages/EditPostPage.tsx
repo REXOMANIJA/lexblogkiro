@@ -61,7 +61,7 @@ export function EditPostPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+      <div className="min-h-screen" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
         <LogoutButton />
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex justify-center items-center py-24">
@@ -77,7 +77,7 @@ export function EditPostPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+      <div className="min-h-screen" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
         <LogoutButton />
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-red-800 dark:text-red-200 mb-6 animate-scale-in">
@@ -109,11 +109,11 @@ export function EditPostPage() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 animate-fade-in">
-          <Link to={`/post/${id}`} className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group">
+          <Link to={`/post/${id}`} className="inline-flex items-center gap-2 font-serif transition-colors group" style={{ color: '#c2d0bd' }} onMouseEnter={(e) => e.currentTarget.style.color = '#caa873'} onMouseLeave={(e) => e.currentTarget.style.color = '#c2d0bd'}>
             <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>

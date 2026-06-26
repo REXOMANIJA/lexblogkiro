@@ -34,9 +34,9 @@ export function NewsletterSubscriptionForm() {
       <div 
         className="max-w-2xl mx-auto p-6 sm:p-8 rounded-xl"
         style={{ 
-          backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-          border: '1px solid rgba(180, 207, 185, 0.6)',
-          boxShadow: '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)',
+          backgroundColor: 'rgba(230, 223, 208, 0.92)', 
+          border: '1px solid rgba(176, 141, 87, 0.3)',
+          boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.15)',
           backdropFilter: 'blur(10px)'
         }}
       >

@@ -1,15 +1,27 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-sans: "Lora", system-ui, sans-serif;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Better font rendering */
+/* Better font rendering + storybook body type */
 body {
+  font-family: "Lora", Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Display serif for headings */
+h1, h2, h3, .font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 /* Dark mode styles */
@@ -144,7 +156,29 @@ img {
 /* Rich text content styles */
 .prose {
   color: #507c58;
-  max-width: 65ch;
+  max-width: 68ch;
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+
+/* Decorative ornamental divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #b08d57;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  height: 1px;
+  width: clamp(2rem, 12vw, 6rem);
+  background: linear-gradient(to right, transparent, #caa873);
+}
+.ornament-divider::after {
+  background: linear-gradient(to left, transparent, #caa873);
 }
 
 .prose h1 {

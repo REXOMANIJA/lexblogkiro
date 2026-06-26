@@ -141,12 +141,12 @@ export function Comments({ postId }: CommentsProps) {
 
   return (
     <div className="mt-12 sm:mt-16">
-      <h3 className="text-2xl font-bold mb-6" style={{ color: '#304b35' }}>
+      <h3 className="font-display text-3xl font-semibold mb-6" style={{ color: '#f4ecda' }}>
         Komentari ({comments.length})
       </h3>
 
       {/* Comment Form */}
-      <div className="rounded-xl p-6 shadow-md mb-8" style={{ backgroundColor: '#f0f5f1', borderColor: '#d2e2d5' }}>
+      <div className="rounded-xl p-6 shadow-md mb-8 border" style={{ backgroundColor: 'rgba(230, 223, 208, 0.92)', borderColor: 'rgba(176, 141, 87, 0.3)', boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.15)' }}>
         <h4 className="text-lg font-semibold mb-4" style={{ color: '#304b35' }}>
           Ostavi komentar
         </h4>
@@ -274,9 +274,9 @@ export function Comments({ postId }: CommentsProps) {
               key={comment.id}
               className="rounded-xl p-6 shadow-md border"
               style={{ 
-                backgroundColor: '#f0f5f1', 
-                borderColor: '#e1ece3',
-                boxShadow: '0 4px 6px -1px rgba(48, 75, 53, 0.1), 0 2px 4px -1px rgba(48, 75, 53, 0.06)'
+                backgroundColor: 'rgba(230, 223, 208, 0.92)', 
+                borderColor: 'rgba(176, 141, 87, 0.3)',
+                boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.15)'
               }}
             >
               <div className="flex items-start justify-between">

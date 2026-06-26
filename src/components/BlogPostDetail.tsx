@@ -106,16 +106,16 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
       <div 
         className="rounded-2xl shadow-lg border p-8 sm:p-12 animate-slide-up"
         style={{ 
-          backgroundColor: '#f0f5f1', 
-          borderColor: '#d2e2d5',
-          boxShadow: '0 10px 25px -5px rgba(48, 75, 53, 0.1), 0 4px 6px -2px rgba(48, 75, 53, 0.05)'
+          backgroundColor: 'rgba(230, 223, 208, 0.94)', 
+          borderColor: 'rgba(176, 141, 87, 0.35)',
+          boxShadow: '0 18px 40px -12px rgba(0, 0, 0, 0.28), 0 4px 10px -4px rgba(0, 0, 0, 0.15)'
         }}
       >
         {/* Title and Admin controls */}
         <header className="mb-8 sm:mb-10">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 sm:gap-6">
             <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6 leading-tight animate-slide-up" style={{ color: '#304b35' }}>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 leading-tight animate-slide-up" style={{ color: '#304b35' }}>
                 {post.title}
               </h1>
               <div className="flex items-center gap-3 text-sm sm:text-base animate-slide-up" style={{ animationDelay: '0.1s', color: '#507c58' }}>
@@ -275,13 +275,21 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
           </div>
         )}
 
+        {/* Ornamental divider before the story */}
+        <div className="ornament-divider mb-8 sm:mb-10 animate-fade-in" style={{ animationDelay: '0.25s' }}>
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2c1.5 3 3.5 4.5 6.5 5C15.5 8 13.5 9.5 12 12c-1.5-2.5-3.5-4-6.5-5C8.5 6.5 10.5 5 12 2z" />
+            <path d="M12 12c1.5 3 3.5 4.5 6.5 5-3 .5-5 2-6.5 5-1.5-3-3.5-4.5-6.5-5 3-.5 5-2 6.5-5z" opacity="0.7" />
+          </svg>
+        </div>
+
         {/* Story Content with more margin */}
         <div 
-          className="animate-slide-up mx-8 sm:mx-16 lg:mx-24" 
+          className="animate-slide-up mx-0 sm:mx-8 lg:mx-16" 
           style={{ animationDelay: '0.3s' }}
         >
           <div 
-            className="prose prose-lg max-w-none text-left leading-relaxed"
+            className="story-prose prose prose-lg max-w-none mx-auto text-left leading-relaxed"
             style={{
               color: '#304b35',
             }}
@@ -346,8 +354,8 @@ export function BlogPostDetail({ post }: BlogPostDetailProps) {
       `}</style>
 
       {/* Metadata footer */}
-      <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+      <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t animate-fade-in" style={{ animationDelay: '0.4s', borderColor: 'rgba(202, 168, 115, 0.25)' }}>
+        <div className="flex items-center gap-2 text-sm font-serif" style={{ color: '#9fb0a0' }}>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>

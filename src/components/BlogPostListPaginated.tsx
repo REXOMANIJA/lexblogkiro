@@ -190,8 +190,8 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-gray-700 mb-2">Trenutno nema objava</h3>
-        <p className="max-w-md mx-auto" style={{ color: '#53815b' }}>
+        <h3 className="font-display text-3xl font-semibold mb-2" style={{ color: '#f4ecda' }}>Trenutno nema objava</h3>
+        <p className="font-serif max-w-md mx-auto" style={{ color: '#9fb0a0' }}>
           Vrati se ubrzo kada se dodaju! Prijavi se na newsletter da bi dobio obavestenje o novim kada izadju!
         </p>
       </div>
@@ -217,8 +217,8 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-gray-700 mb-2">Trenutno nema objava</h3>
-        <p className="max-w-md mx-auto" style={{ color: '#53815b' }}>
+        <h3 className="font-display text-3xl font-semibold mb-2" style={{ color: '#f4ecda' }}>Trenutno nema objava</h3>
+        <p className="font-serif max-w-md mx-auto" style={{ color: '#9fb0a0' }}>
           Nema objava u izabranoj kategoriji. Probaj skloniti filtere da bi video sve objave.
         </p>
       </div>
@@ -232,21 +232,21 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
           <Link
             key={post.id}
             to={`/post/${post.id}`}
-            className="stagger-item group rounded-xl overflow-hidden transition-all duration-300 block relative transform hover:-translate-y-2"
+            className="stagger-item group rounded-2xl overflow-hidden transition-all duration-300 block relative transform hover:-translate-y-2"
             style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-              border: '1px solid rgba(180, 207, 185, 0.6)',
-              boxShadow: '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)',
+              backgroundColor: 'rgba(230, 223, 208, 0.92)', 
+              border: '1px solid rgba(176, 141, 87, 0.3)',
+              boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.15)',
               backdropFilter: 'blur(10px)',
               animationDelay: `${index * 0.05}s`
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.border = '1px solid rgba(106, 160, 116, 0.8)';
-              e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(48, 75, 53, 0.25), 0 8px 20px -5px rgba(48, 75, 53, 0.15), 0 0 20px rgba(106, 160, 116, 0.2)';
+              e.currentTarget.style.border = '1px solid rgba(176, 141, 87, 0.65)';
+              e.currentTarget.style.boxShadow = '0 22px 44px -12px rgba(0, 0, 0, 0.35), 0 8px 20px -5px rgba(0, 0, 0, 0.2), 0 0 24px rgba(176, 141, 87, 0.22)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.border = '1px solid rgba(180, 207, 185, 0.6)';
-              e.currentTarget.style.boxShadow = '0 8px 25px -5px rgba(48, 75, 53, 0.15), 0 4px 10px -2px rgba(48, 75, 53, 0.1)';
+              e.currentTarget.style.border = '1px solid rgba(176, 141, 87, 0.3)';
+              e.currentTarget.style.boxShadow = '0 8px 25px -5px rgba(0, 0, 0, 0.25), 0 4px 10px -2px rgba(0, 0, 0, 0.15)';
             }}
           >
             <article>
@@ -293,19 +293,22 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
                   <img
                     src={post.photo_urls[0]}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
               )}
 
               <div className="p-5 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-bold mb-3 line-clamp-2 transition-colors" style={{ color: '#304b35' }}>
+                <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-3 line-clamp-2 leading-tight transition-colors" style={{ color: '#304b35' }}>
                   {post.title}
                 </h2>
-                <p className="text-sm sm:text-base mb-4 line-clamp-3 leading-relaxed" style={{ color: '#507c58' }}>
+                <p className="font-serif text-sm sm:text-base mb-4 line-clamp-3 leading-relaxed" style={{ color: '#507c58' }}>
                   {createExcerpt(post.story)}
                 </p>
+                <div className="mb-4">
+                  <span className="block h-px w-12" style={{ background: 'linear-gradient(to right, #caa873, transparent)' }}></span>
+                </div>
                 <div className="flex items-center justify-between">
                   <time className="text-xs sm:text-sm flex items-center gap-1.5" style={{ color: '#53815b' }}>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -370,7 +373,7 @@ export function BlogPostListPaginated({ selectedCategoryIds = [] }: BlogPostList
       {/* End of posts message */}
       {!hasMore && posts.length > 0 && (
         <div className="text-center py-8">
-          <p className="text-sm" style={{ color: '#53815b' }}>
+          <p className="font-serif italic text-sm" style={{ color: '#9fb0a0' }}>
             Došao si do kraja objava. Prijavi se na newsletter da bi dobio obaveštenje o novim kada izadju!
           </p>
         </div>

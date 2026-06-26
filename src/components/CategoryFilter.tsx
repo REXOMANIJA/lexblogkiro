@@ -79,7 +79,7 @@ export function CategoryFilter({ selectedCategoryIds, onCategoryToggle, onClearF
     <div className="mb-8 animate-fade-in">
       <div className="flex flex-wrap items-center gap-3">
         {/* Filter label */}
-        <span className="text-sm font-medium" style={{ color: '#304b35' }}>
+        <span className="text-sm font-medium" style={{ color: '#c2d0bd' }}>
           Filtriraj po kategoriji:
         </span>
 

@@ -124,15 +124,15 @@ export function CategoryManagementPage() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-4" style={{ background: 'radial-gradient(ellipse at top, #f0f5f1 0%, #e1ece3 30%, #d3e3d6 60%, #c3d9c7 100%)' }}>
+    <div className="min-h-screen py-8 px-4" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2" style={{ color: '#304b35' }}>
+            <h1 className="font-display text-4xl font-semibold mb-2" style={{ color: '#f4ecda' }}>
               Category Management
             </h1>
-            <p style={{ color: '#507c58' }}>
+            <p className="font-serif" style={{ color: '#c2d0bd' }}>
               Create and manage blog post categories
             </p>
           </div>

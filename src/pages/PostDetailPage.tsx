@@ -42,7 +42,7 @@ export function PostDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+      <div className="min-h-screen flex justify-center items-center" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
         <div className="relative">
           <div className="animate-spin rounded-full h-16 w-16 border-4" style={{ borderColor: '#d2e2d5' }}></div>
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-t-transparent absolute top-0 left-0" style={{ borderColor: '#6aa074' }}></div>
@@ -53,7 +53,7 @@ export function PostDetailPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+      <div className="min-h-screen" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="border rounded-xl p-6 mb-6 animate-scale-in" style={{ backgroundColor: '#e1ece3', borderColor: '#c3d9c7', color: '#507c58' }}>
             <div className="flex items-start gap-3 mb-4">
@@ -93,14 +93,17 @@ export function PostDetailPage() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(45deg, #f0f5f1 0%, #e1ece3 25%, #d3e3d6 50%, #c3d9c7 75%, #b4cfb9 100%)' }}>
+    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
       <LogoutButton />
       <div className="max-w-7xl mx-auto">
         {/* Back button */}
         <div className="px-4 sm:px-6 py-6 animate-fade-in">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group"
+            className="inline-flex items-center gap-2 font-serif transition-colors group"
+            style={{ color: '#c2d0bd' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#caa873')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#c2d0bd')}
           >
             <svg
               className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"

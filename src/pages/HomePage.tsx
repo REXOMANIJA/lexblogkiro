@@ -43,22 +43,31 @@ export function HomePage() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300" style={{ background: 'linear-gradient(135deg, #f0f5f1 0%, #e1ece3 20%, #d3e3d6 40%, #c3d9c7 60%, #b4cfb9 80%, #a5c6ab 100%)' }}>
+    <div className="min-h-screen transition-colors duration-300 relative" style={{ background: 'linear-gradient(165deg, #3d4f42 0%, #354539 28%, #2d3c31 55%, #27362b 85%, #233028 100%)' }}>
+      {/* Atmospheric glow: warm moonlight above, subtle depth below */}
+      <div className="pointer-events-none fixed inset-0" style={{ background: 'radial-gradient(ellipse 85% 45% at 50% -8%, rgba(202, 168, 115, 0.12) 0%, transparent 58%), radial-gradient(circle at 50% 115%, rgba(0,0,0,0.18) 0%, transparent 50%)' }}></div>
+
       <LogoutButton />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Header with enhanced styling */}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
+        {/* Header with storybook styling */}
         <header className="mb-12 sm:mb-16 text-center animate-fade-in">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-3 sm:mb-4 tracking-tight" style={{ color: '#304b35' }}>
+          <p className="font-serif italic text-sm sm:text-base tracking-[0.3em] uppercase mb-3 sm:mb-4" style={{ color: '#caa873' }}>
+            Jednom davno
+          </p>
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold mb-3 sm:mb-4 tracking-tight" style={{ color: '#f4ecda', textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}>
             Šunja i Siže
           </h1>
-          <p className="text-lg sm:text-xl max-w-2xl mx-auto" style={{ color: '#507c58' }}>
+          <p className="font-serif italic text-lg sm:text-xl max-w-2xl mx-auto" style={{ color: '#c2d0bd' }}>
             Uglavnom kratke priče i poneka bajka
           </p>
-          
-          {/* Decorative divider */}
-          <div className="mt-6 sm:mt-8 flex items-center justify-center">
-            <div className="h-1 w-16 rounded-full" style={{ background: 'linear-gradient(to right, #6aa074, #507c58)' }}></div>
+
+          {/* Decorative ornamental divider */}
+          <div className="ornament-divider mt-6 sm:mt-8">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2c1.5 3 3.5 4.5 6.5 5C15.5 8 13.5 9.5 12 12c-1.5-2.5-3.5-4-6.5-5C8.5 6.5 10.5 5 12 2z" />
+              <path d="M12 12c1.5 3 3.5 4.5 6.5 5-3 .5-5 2-6.5 5-1.5-3-3.5-4.5-6.5-5 3-.5 5-2 6.5-5z" opacity="0.7" />
+            </svg>
           </div>
         </header>
 
@@ -135,15 +144,19 @@ export function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 border-t" style={{ borderColor: '#d2e2d5' }}>
+      <footer className="mt-16 py-10 border-t relative" style={{ borderColor: 'rgba(202, 168, 115, 0.25)' }}>
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-sm" style={{ color: '#53815b' }}>
-            Instagram: <a href='https://www.instagram.com/lex_2h4s/' style={{ color: '#53818b' }}>@lex_2h4s</a>
+          <div className="ornament-divider mb-6">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2c1.5 3 3.5 4.5 6.5 5C15.5 8 13.5 9.5 12 12c-1.5-2.5-3.5-4-6.5-5C8.5 6.5 10.5 5 12 2z" />
+            </svg>
+          </div>
+          <p className="font-serif text-sm" style={{ color: '#9fb0a0' }}>
+            Instagram: <a href='https://www.instagram.com/lex_2h4s/' className="underline decoration-dotted underline-offset-2" style={{ color: '#caa873' }}>@lex_2h4s</a>
           </p>
-          <p className="text-sm" style={{ color: '#53815b' }}>
+          <p className="font-serif italic text-sm mt-1" style={{ color: '#9fb0a0' }}>
             © {new Date().getFullYear()} Šunja i Siže. All rights reserved.
-            </p>
-            
+          </p>
         </div>
       </footer>
     </div>

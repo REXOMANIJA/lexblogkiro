@@ -7,7 +7,25 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['Lora', 'Georgia', 'serif'],
+        sans: ['Lora', 'system-ui', 'sans-serif'],
+      },
       colors: {
+        parchment: {
+          DEFAULT: '#f6f1e4',
+          50: '#fbf8f1',
+          100: '#f6f1e4',
+          200: '#ece2cb',
+          300: '#e0d0ac',
+          400: '#d2bb88',
+        },
+        gold: {
+          DEFAULT: '#b08d57',
+          light: '#caa873',
+          dark: '#8c6d3f',
+        },
         primary: {
           50: '#f0f5f1',
           100: '#e1ece3',
