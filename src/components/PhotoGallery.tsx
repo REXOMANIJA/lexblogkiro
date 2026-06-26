@@ -8,6 +8,7 @@ interface PhotoGalleryProps {
 export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
   const len = photos?.length ?? 0;
   const [index, setIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const startXRef = useRef<number | null>(null);
 
   const next = () => {
@@ -35,13 +36,17 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isLightboxOpen) {
+        setIsLightboxOpen(false);
+        return;
+      }
       if (len <= 1) return;
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [len]);
+  }, [len, isLightboxOpen]);
 
   if (len === 0) return null;
 
@@ -88,9 +93,9 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
         className="relative z-20 w-[90vw] sm:w-[70vw] md:w-[80%] h-[80vh] max-h-[600px] transition-transform duration-500 flex items-center justify-center"
       >
         <button
-          onClick={next}
-          className="absolute inset-0 z-30"
-          aria-label="Next photo"
+          onClick={() => setIsLightboxOpen(true)}
+          className="absolute inset-0 z-30 cursor-zoom-in"
+          aria-label="View full size"
         />
         <img
           src={photos[index]}
@@ -125,6 +130,64 @@ export function PhotoGallery({ photos, alt }: PhotoGalleryProps) {
       {len > 1 && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 rounded-full bg-black/30 px-3 py-1 text-xs sm:text-sm text-white">
           {index + 1} / {len}
+        </div>
+      )}
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-4 right-4 z-[10000] rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors"
+            aria-label="Close lightbox"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div 
+            className="relative max-w-[95vw] max-h-[95vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={photos[index]}
+              alt={`${alt}-${index} full size`}
+              className="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl"
+            />
+            
+            {/* Navigation in lightbox */}
+            {len > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prev();
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-4 text-white hover:bg-white/30 transition-colors text-2xl font-bold"
+                  aria-label="Previous photo"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    next();
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-4 text-white hover:bg-white/30 transition-colors text-2xl font-bold"
+                  aria-label="Next photo"
+                >
+                  ›
+                </button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-4 py-2 text-sm text-white">
+                  {index + 1} / {len}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>
