@@ -52,9 +52,6 @@ export function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
         {/* Header with storybook styling */}
         <header className="mb-12 sm:mb-16 text-center animate-fade-in">
-          <p className="font-serif italic text-sm sm:text-base tracking-[0.3em] uppercase mb-3 sm:mb-4" style={{ color: '#caa873' }}>
-            Jednom davno
-          </p>
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold mb-3 sm:mb-4 tracking-tight" style={{ color: '#f4ecda', textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}>
             Šunja i Siže
           </h1>

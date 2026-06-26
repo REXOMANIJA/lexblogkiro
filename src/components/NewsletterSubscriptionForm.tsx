@@ -41,10 +41,10 @@ export function NewsletterSubscriptionForm() {
         }}
       >
         <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold mb-2" style={{ color: '#304b35' }}>
+          <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-2" style={{ color: '#304b35' }}>
             UHVATI ME BRŽE
           </h2>
-          <p className="text-sm sm:text-base" style={{ color: '#507c58' }}>
+          <p className="font-serif text-sm sm:text-base" style={{ color: '#507c58' }}>
             Budite prvi obavešteni, pročitajte i one reči koje poslažem pre nego se predomislim
           </p>
         </div>
